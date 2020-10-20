@@ -11,7 +11,7 @@ android {
     buildToolsVersion("30.0.1")
 
     defaultConfig {
-        applicationId = "com.mayburger.movie"
+        applicationId = "com.mayburger.gojekuiclone"
         minSdkVersion(21)
         targetSdkVersion(30)
         versionCode = 1

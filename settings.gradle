@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Movie"
+rootProject.name = "GojekUIClone"
