@@ -14,137 +14,154 @@
         <import type="com.mayburger.gojekuiclone.constants.LocaleConstants" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/activity_main_xml_constraintlayout_scene">
 
-        <View
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#4B000000" />
+            android:layout_height="match_parent">
 
-        <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/constraintLayout"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/homebackground" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="64dp" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutDescription="@xml/activity_main_xml_constraintlayout_scene">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardElevation="2dp"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="6dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/shp_circle_grey" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:padding="8dp">
 
-                    <View
-                        android:layout_width="40dp"
-                        android:layout_height="6dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp"
-                        android:background="@drawable/shp_circle_grey" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/goride" />
+
+                        <com.mayburger.gojekuiclone.util.textfont.TextFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="GoRide"
+                            android:textColor="#000" />
+                    </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="8dp">
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/gocar" />
+
+                        <com.mayburger.gojekuiclone.util.textfont.TextFont
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                            android:layout_marginTop="5dp"
+                            android:text="GoCar"
+                            android:textColor="#000"
+                            />
+                    </LinearLayout>
 
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/goride" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                            <com.mayburger.gojekuiclone.util.textfont.TextFont
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="GoRide"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/gofood" />
+
+                        <com.mayburger.gojekuiclone.util.textfont.TextFont
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
+                            android:layout_marginTop="5dp"
+                            android:text="GoFood"
+                            android:textColor="#000" />
+                    </LinearLayout>
 
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/gocar" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
 
-                            <com.mayburger.gojekuiclone.util.textfont.TextFont
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="GoCar"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/goshop" />
+
+                        <com.mayburger.gojekuiclone.util.textfont.TextFont
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/gofood" />
-
-                            <com.mayburger.gojekuiclone.util.textfont.TextFont
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="GoFood"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:src="@drawable/goshop" />
-
-                            <com.mayburger.gojekuiclone.util.textfont.TextFont
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="GoShop"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
+                            android:layout_marginTop="5dp"
+                            android:text="GoShop"
+                            android:textColor="#000"
+                            />
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
-        </androidx.constraintlayout.motion.widget.MotionLayout>
-    </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
 
 </layout>

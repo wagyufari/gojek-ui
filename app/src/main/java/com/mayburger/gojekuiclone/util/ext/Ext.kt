@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -24,6 +25,10 @@ fun Int.toStringJson(mContext: Context): String {
         }
     }
     return writer.toString()
+}
+
+fun ViewGroup.sheetBehavior():BottomSheetBehavior<*>{
+    return BottomSheetBehavior.from(this)
 }
 
 fun View.setOnClickAnimate(drawable: Drawable?,runnable:Runnable){
