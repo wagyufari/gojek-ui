@@ -15,4 +15,5 @@
     <color name="colorGreyDecor">#E3ECF1</color>
     <color name="colorGreyBackground">#EDF2F2</color>
     <color name="colorGreyDecorDark">#B7BFC5</color>
+    <color name="colorTextGrey">#A7A7A7</color>
 </resources>

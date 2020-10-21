@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.viewModels
+import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mayburger.gojekuiclone.BR
 import com.mayburger.gojekuiclone.R
@@ -13,6 +14,7 @@ import com.mayburger.gojekuiclone.ui.base.BaseActivity
 import com.mayburger.gojekuiclone.ui.main.fragments.chat.MainChatFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.home.MainHomeFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.promos.MainPromosFragment
+import com.mayburger.gojekuiclone.ui.main.fragments.services.MainServicesFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_tab_layout.view.*
@@ -32,33 +34,53 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         super.onCreate(savedInstanceState)
 
         val adapter = TabPagerAdapter(
-            this,
-            arrayListOf(
-                MainPromosFragment(),
-                MainHomeFragment(),
-                MainChatFragment(),
-            )
+                this,
+                arrayListOf(
+                        MainPromosFragment(),
+                        MainHomeFragment(),
+                        MainChatFragment(),
+                )
         )
         pager.adapter = adapter
         TabLayoutMediator(tab, pager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.customView = getTabLayout("Promos",R.drawable.promos)
+                    tab.customView = getTabLayout("Promos", R.drawable.promos)
                 }
                 1 -> {
-                    tab.customView = getTabLayout("Home",R.drawable.home)
+                    tab.customView = getTabLayout("Home", R.drawable.home)
                 }
                 2 -> {
-                    tab.customView = getTabLayout("Chat",R.drawable.chat)
+                    tab.customView = getTabLayout("Chats", R.drawable.chat)
                 }
             }
         }.attach()
-        pager.setCurrentItem(1,false)
+        pager.setCurrentItem(1, false)
+
+        val manager = supportFragmentManager.beginTransaction()
+        manager.add(R.id.container, MainServicesFragment(), "")
+        manager.commit()
+
+        motion.addTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            }
+
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            }
+
+            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                container.alpha = p3
+                favorites.alpha = 1-(p3*3)
+            }
+
+            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+            }
+        })
     }
 
 
-    fun getTabLayout(title:String,icon:Int): View {
-        val tab = LayoutInflater.from(this).inflate(R.layout.main_tab_layout,null,false)
+    fun getTabLayout(title: String, icon: Int): View {
+        val tab = LayoutInflater.from(this).inflate(R.layout.main_tab_layout, null, false)
         tab.title.text = title
         tab.icon.setImageResource(icon)
         return tab

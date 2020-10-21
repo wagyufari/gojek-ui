@@ -11,6 +11,17 @@
             motion:touchAnchorId="@id/materialCardView"
             motion:touchAnchorSide="top"
             motion:touchRegionId="@id/materialCardView" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                motion:framePosition="1"
+                motion:motionTarget="@id/materialCardView">
+                <CustomAttribute
+                    motion:attributeName="radius"
+                    motion:customDimension="48dp" />
+            </KeyAttribute>
+        </KeyFrameSet>
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -18,15 +29,17 @@
         <Constraint
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:alpha="1"
             motion:layout_constraintBottom_toBottomOf="parent">
             <CustomAttribute
                 motion:attributeName="radius"
-                motion:customDimension="200dp"/>
+                motion:customDimension="200dp" />
         </Constraint>
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -36,9 +49,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             motion:layout_constraintBottom_toBottomOf="parent">
+            <PropertySet android:alpha="1" />
             <CustomAttribute
                 motion:attributeName="radius"
-                motion:customDimension="0dp"/>
+                motion:customDimension="16dp" />
         </Constraint>
+
     </ConstraintSet>
 </MotionScene>
