@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -30,6 +31,21 @@ fun Int.toStringJson(mContext: Context): String {
 fun ViewGroup.sheetBehavior():BottomSheetBehavior<*>{
     return BottomSheetBehavior.from(this)
 }
+
+fun MotionLayout.onTransitionEnd(trigger:(state:Int)->Unit){
+    this.addTransitionListener(object:MotionLayout.TransitionListener{
+        override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+        }
+        override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+        }
+        override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+        }
+        override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+            trigger.invoke(p1)
+        }
+    })
+}
+
 
 fun View.setOnClickAnimate(drawable: Drawable?,runnable:Runnable){
     val view = this

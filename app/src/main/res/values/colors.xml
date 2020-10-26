@@ -7,6 +7,11 @@
     <color name="blue_200">#00AFDE</color>
     <color name="blue_700">#347896</color>
 
+    <color name="red_200">#FF000E</color>
+
+    <color name="green_200">#31B057</color>
+    <color name="green_700">#00880D</color>
+
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>

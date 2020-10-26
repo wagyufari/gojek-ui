@@ -18,38 +18,40 @@
         android:id="@+id/motion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/activity_main_xml_constraintlayout_scene">
+        android:fitsSystemWindows="true"
+        app:layoutDescription="@xml/activity_main_scene">
 
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/homebackground"
+            app:layout_constraintHeight_percent="0.6" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <LinearLayout
             android:id="@+id/root"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/homebackground" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
+                android:layout_marginTop="24dp"
                 android:background="@android:color/transparent" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="64dp" />
+                android:layout_height="match_parent" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -65,8 +67,8 @@
                     android:orientation="vertical">
 
                     <View
-                        android:layout_width="40dp"
-                        android:layout_height="6dp"
+                        android:layout_width="32dp"
+                        android:layout_height="4dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -83,6 +85,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:id="@+id/goride"
                             android:gravity="center_horizontal"
                             android:orientation="vertical">
 
@@ -120,6 +123,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/gofood"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -169,8 +173,14 @@
                     android:alpha="0"
                     android:background="@color/white" />
             </RelativeLayout>
-
         </com.google.android.material.card.MaterialCardView>
+
+        <RelativeLayout
+            android:id="@+id/alpha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="#66000000" />
 
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
