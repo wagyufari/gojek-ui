@@ -6,9 +6,6 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="500">
-        <OnClick
-            motion:clickAction="toggle"
-            motion:targetId="@id/card" />
     </Transition>
 
     <ConstraintSet android:id="@+id/end">
@@ -16,7 +13,7 @@
             android:id="@+id/card"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             motion:layout_constraintLeft_toLeftOf="parent"
@@ -39,7 +36,7 @@
             motion:layout_constraintBottom_toBottomOf="parent">
             <CustomAttribute
                 motion:attributeName="radius"
-                motion:customDimension="16dp" />
+                motion:customDimension="8dp" />
         </Constraint>
     </ConstraintSet>
 

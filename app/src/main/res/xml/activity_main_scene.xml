@@ -3,9 +3,10 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/aEnd"
-        motion:constraintSetStart="@id/start"
+        motion:constraintSetEnd="@+id/mainEnd"
+        motion:constraintSetStart="@id/mainStart"
         motion:duration="1000">
+
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:touchAnchorId="@id/materialCardView"
@@ -24,7 +25,7 @@
 
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet android:id="@+id/mainStart">
 
         <Constraint
             android:id="@+id/materialCardView"
@@ -48,7 +49,7 @@
 
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/aEnd">
+    <ConstraintSet android:id="@+id/mainEnd">
 
         <Constraint
             android:id="@+id/materialCardView"

@@ -85,12 +85,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:id="@+id/goride"
                             android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <ImageView
                                 android:layout_width="40dp"
+                                android:id="@+id/goride"
                                 android:layout_height="40dp"
                                 android:src="@drawable/goride" />
 
@@ -112,6 +112,7 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
+                                android:id="@+id/gocar"
                                 android:src="@drawable/gocar" />
 
                             <com.mayburger.gojekuiclone.util.textfont.TextFont
@@ -123,7 +124,6 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/gofood"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -132,6 +132,7 @@
 
                             <ImageView
                                 android:layout_width="40dp"
+                                android:id="@+id/gofood"
                                 android:layout_height="40dp"
                                 android:src="@drawable/gofood" />
 
@@ -152,6 +153,7 @@
 
                             <ImageView
                                 android:layout_width="40dp"
+                                android:id="@+id/goshop"
                                 android:layout_height="40dp"
                                 android:src="@drawable/goshop" />
 

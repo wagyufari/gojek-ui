@@ -12,7 +12,8 @@
         android:theme="@style/Theme.Gojek">
         <activity android:name=".FoodActivity">
         </activity>
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.Gojek.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

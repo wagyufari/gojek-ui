@@ -19,6 +19,17 @@ class FoodActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food)
 
+        card.setOnClickListener {
+            if(motionLayout.currentState == R.id.start){
+                textOrder.visibility = View.GONE
+                progressOrder.visibility = View.VISIBLE
+                delay(2000){
+                    progressOrder.visibility = View.GONE
+                    motionLayout.transitionToEnd()
+                }
+            }
+        }
+
         motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
 
@@ -93,6 +104,12 @@ class FoodActivity : AppCompatActivity() {
                         play(ObjectAnimator.ofFloat(card, View.TRANSLATION_Y, 0f, 700f).apply {
                             duration = 2000
                         }).after(2500)
+
+                        play(ObjectAnimator.ofFloat(marker_foot,View.TRANSLATION_Y,0f,630f))
+                        play(ObjectAnimator.ofFloat(marker_foot,View.ALPHA, 0f,1f).apply{
+                            duration = 500
+                        }).after(4300)
+
                         start()
                     }
                 }

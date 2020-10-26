@@ -1,11 +1,14 @@
 package com.mayburger.gojekuiclone.ui.main
 
+import android.content.Context
 import android.content.Intent
-import android.os.Build
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.DashPathEffect
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -43,7 +46,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
 
+        goride.setOnClickListener {
+            startActivity(Intent(this, FoodActivity::class.java))
+        }
+        gocar.setOnClickListener {
+            startActivity(Intent(this, FoodActivity::class.java))
+        }
         gofood.setOnClickListener {
+            startActivity(Intent(this, FoodActivity::class.java))
+        }
+        goshop.setOnClickListener {
             startActivity(Intent(this, FoodActivity::class.java))
         }
 
@@ -91,6 +103,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
             }
         })
     }
+
 
     override fun onPause() {
         super.onPause()
