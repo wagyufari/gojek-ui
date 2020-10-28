@@ -11,5 +11,10 @@ class AppDataManager @Inject constructor(
     private val mContext: Context,
     private val mHawkHelper: HawkHelper
 ) : DataManager {
+    override var isGrabCardLocked: Boolean
+        get() = mHawkHelper.isGrabCardLocked
+        set(value) {
+            mHawkHelper.isGrabCardLocked = value
+        }
 
 }

@@ -1,5 +1,6 @@
 package com.mayburger.gojekuiclone.util.ext
 
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
@@ -12,6 +13,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.animation.addListener
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import com.mayburger.gojekuiclone.R
@@ -35,6 +37,28 @@ object ViewUtils {
         progressDialog.setIndeterminateDrawable(drawable)
         progressDialog.setCancelable(false)
         return progressDialog
+    }
+
+    fun View.fadeHide(callback: (() -> Unit?)? =null){
+        ObjectAnimator.ofFloat(this,View.ALPHA,0f).apply {
+            duration = 700
+            start()
+            addListener(onEnd = {
+                callback?.invoke()
+                this@fadeHide.visibility = View.GONE
+            })
+        }
+    }
+    fun View.fadeShow(callback: (() -> Unit?)? =null){
+        this.alpha = 0f
+        this.visibility = View.VISIBLE
+        ObjectAnimator.ofFloat(this,View.ALPHA,1f).apply {
+            duration = 700
+            start()
+            addListener(onEnd={
+                callback?.invoke()
+            })
+        }
     }
 
     fun hideKeyboard(activity: Activity) {

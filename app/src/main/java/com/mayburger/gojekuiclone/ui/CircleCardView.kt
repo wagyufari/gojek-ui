@@ -9,9 +9,8 @@ class CircleCardView @JvmOverloads constructor(context: Context, attrs: Attribut
     : CardView(context, attrs, defStyleAttr) {
 
     override fun setRadius(radius: Float) {
-        super.setRadius(
-                if (radius > height / 2 || radius > width / 2) height.coerceAtMost(width) / 2f
-                else radius
+        super.setRadius(if (radius > height / 2 || radius > width / 2) height.coerceAtMost(width) / 2f
+            else radius
         )
     }
 }

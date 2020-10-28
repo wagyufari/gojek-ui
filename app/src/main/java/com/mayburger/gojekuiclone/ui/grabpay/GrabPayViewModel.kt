@@ -3,20 +3,21 @@ package com.mayburger.gojekuiclone.ui.grabpay
 import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
 import android.view.View
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.view.animation.PathInterpolatorCompat
-import androidx.databinding.ObservableArrayList
+import androidx.core.animation.addListener
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
-import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
-import com.mayburger.gojekuiclone.ui.main.MainNavigator
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
-import kotlinx.android.synthetic.main.activity_food.*
+import kotlinx.android.synthetic.main.activity_grab_pay.*
 
 
 class GrabPayViewModel @ViewModelInject constructor(
@@ -28,5 +29,134 @@ class GrabPayViewModel @ViewModelInject constructor(
     }
 
 
+
+    companion object {
+
+        fun playLines(drawable: Drawable) {
+            if (drawable is AnimatedVectorDrawableCompat) {
+                drawable.start()
+            } else if (drawable is AnimatedVectorDrawable) {
+                drawable.start()
+            }
+        }
+
+        fun GrabPayActivity.playLockCardAnimation(){
+            val animation = ValueAnimator.ofFloat(1f, 0f)
+            animation.duration = 2000
+            animation.addUpdateListener {
+                val cm = ColorMatrix()
+                cm.setSaturation(animation.animatedValue as Float)
+                val greyscalePaint = Paint()
+                greyscalePaint.colorFilter = ColorMatrixColorFilter(cm)
+                card.setLayerType(View.LAYER_TYPE_HARDWARE, greyscalePaint);
+            }
+            animation.start()
+        }
+        fun GrabPayActivity.playUnlockCardAnimation(){
+            val animation = ValueAnimator.ofFloat(0f, 1f)
+            animation.duration = 2000
+            animation.addUpdateListener {
+                val cm = ColorMatrix()
+                cm.setSaturation(animation.animatedValue as Float)
+                val greyscalePaint = Paint()
+                greyscalePaint.colorFilter = ColorMatrixColorFilter(cm)
+                card.setLayerType(View.LAYER_TYPE_HARDWARE, greyscalePaint);
+            }
+            animation.start()
+        }
+
+        fun GrabPayActivity.toCardDetail() {
+            isAnimating = true
+            AnimatorSet().apply {
+                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 0.1f).apply {
+                    duration = 200
+                    addListener(object : Animator.AnimatorListener {
+                        override fun onAnimationRepeat(p0: Animator?) {
+                        }
+
+                        override fun onAnimationEnd(p0: Animator?) {
+                            image.visibility = View.INVISIBLE
+                            image2.visibility = View.INVISIBLE
+                        }
+
+                        override fun onAnimationCancel(p0: Animator?) {
+                        }
+
+                        override fun onAnimationStart(p0: Animator?) {
+                        }
+                    })
+                })
+                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 1f).apply {
+                    duration = 200
+                }).after(200)
+                play(ObjectAnimator.ofFloat(cardDetail, View.ALPHA, 1f).apply {
+                    duration = 700
+                    addListener (onEnd = {
+                        isAnimating = false
+                    })
+                }).after(600)
+                start()
+            }
+            state = 1
+        }
+
+        fun GrabPayActivity.toMain() {
+            isAnimating = true
+            AnimatorSet().apply {
+                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 0.1f).apply {
+                    duration = 200
+                    addListener(object : Animator.AnimatorListener {
+                        override fun onAnimationRepeat(p0: Animator?) {
+                        }
+
+                        override fun onAnimationEnd(p0: Animator?) {
+                            cardDetail.alpha = 0f
+                        }
+
+                        override fun onAnimationCancel(p0: Animator?) {
+                        }
+
+                        override fun onAnimationStart(p0: Animator?) {
+                        }
+                    })
+                })
+                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 1f).apply {
+                    duration = 200
+                }).after(200)
+                delay(200) {
+                    image2.visibility = View.VISIBLE
+                    playLines(image2.drawable)
+                    image.visibility = View.VISIBLE
+                    playLines(image.drawable)
+                }
+                delay(1000){
+                    isAnimating = false
+                }
+                start()
+            }
+            state = 0
+        }
+
+        fun GrabPayActivity.playInitialAnimation(){
+            delay(300) {
+                image2.visibility = View.VISIBLE
+                playLines(image2.drawable)
+                image.visibility = View.VISIBLE
+                playLines(image.drawable)
+                AnimatorSet().apply {
+                    play(ObjectAnimator.ofFloat(mastercard, View.ALPHA, 1f).apply {
+                        duration = 1000
+                    }).after(1000)
+                    play(ObjectAnimator.ofFloat(logo, View.ALPHA, 1f).apply {
+                        duration = 1000
+                        addListener (onEnd = {
+                            isAnimating = false
+                        })
+                    }).after(1000)
+                    start()
+                }
+            }
+        }
+    }
 
 }

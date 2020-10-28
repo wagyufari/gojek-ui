@@ -16,9 +16,9 @@
             <KeyAttribute
                 motion:framePosition="1"
                 motion:motionTarget="@id/materialCardView">
-                <CustomAttribute
-                    motion:attributeName="radius"
-                    motion:customDimension="48dp" />
+<!--                <CustomAttribute-->
+<!--                    motion:attributeName="radius"-->
+<!--                    motion:customDimension="48dp" />-->
             </KeyAttribute>
         </KeyFrameSet>
 
@@ -35,9 +35,9 @@
             android:layout_marginBottom="16dp"
             android:alpha="1"
             motion:layout_constraintBottom_toBottomOf="parent">
-            <CustomAttribute
-                motion:attributeName="radius"
-                motion:customDimension="200dp" />
+<!--            <CustomAttribute-->
+<!--                motion:attributeName="radius"-->
+<!--                motion:customDimension="200dp" />-->
         </Constraint>
 
         <Constraint
@@ -57,9 +57,9 @@
             android:layout_marginTop="24dp"
             motion:layout_constraintBottom_toBottomOf="parent">
             <PropertySet android:alpha="1" />
-            <CustomAttribute
-                motion:attributeName="radius"
-                motion:customDimension="16dp" />
+<!--            <CustomAttribute-->
+<!--                motion:attributeName="radius"-->
+<!--                motion:customDimension="16dp" />-->
         </Constraint>
 
         <Constraint
