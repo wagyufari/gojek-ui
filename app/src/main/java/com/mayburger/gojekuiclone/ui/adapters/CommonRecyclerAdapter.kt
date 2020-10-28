@@ -6,11 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.mayburger.gojekuiclone.BR
 import androidx.recyclerview.widget.RecyclerView
-import com.mayburger.gojekuiclone.ui.base.BaseHorizontalViewHolder
-import com.mayburger.gojekuiclone.ui.base.BaseHorizontalViewModel
+import com.mayburger.gojekuiclone.ui.base.BaseCommonViewHolder
+import com.mayburger.gojekuiclone.ui.base.BaseCommonViewModel
 
-class HorizontalSelectionAdapter<T : BaseHorizontalViewModel?> :
-        RecyclerView.Adapter<BaseHorizontalViewHolder<*>>() {
+class CommonRecyclerAdapter<T : BaseCommonViewModel?> :
+        RecyclerView.Adapter<BaseCommonViewHolder<*>>() {
 
     private var data: java.util.ArrayList<out T>? = null
     private var mListener: Callback<T>? = null
@@ -40,11 +40,11 @@ class HorizontalSelectionAdapter<T : BaseHorizontalViewModel?> :
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-    ): BaseHorizontalViewHolder<*> {
+    ): BaseCommonViewHolder<*> {
         val bind = DataBindingUtil.bind<ViewDataBinding>(
                 LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         )
-        return BaseHorizontalViewHolder(bind)
+        return BaseCommonViewHolder(bind)
     }
 
     fun setListener(listener: Callback<T>) {
@@ -55,7 +55,7 @@ class HorizontalSelectionAdapter<T : BaseHorizontalViewModel?> :
         fun onSelectedItem(position: Int, item: T)
     }
 
-    override fun onBindViewHolder(holder: BaseHorizontalViewHolder<*>, position: Int) {
+    override fun onBindViewHolder(holder: BaseCommonViewHolder<*>, position: Int) {
         val model = data!![position]
         holder.binding.setVariable(BR.viewModel, model)
         holder.binding.root.setOnClickListener {

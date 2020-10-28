@@ -1,11 +1,6 @@
 package com.mayburger.gojekuiclone.ui.main
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.DashPathEffect
-import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +9,17 @@ import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mayburger.gojekuiclone.BR
-import com.mayburger.gojekuiclone.FoodActivity
+import com.mayburger.gojekuiclone.ui.food.FoodActivity
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.databinding.ActivityMainBinding
+import com.mayburger.gojekuiclone.models.events.TransitionEvent
 import com.mayburger.gojekuiclone.ui.adapters.TabPagerAdapter
 import com.mayburger.gojekuiclone.ui.base.BaseActivity
 import com.mayburger.gojekuiclone.ui.main.fragments.chat.MainChatFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.home.MainHomeFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.promos.MainPromosFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.services.MainServicesFragment
+import com.mayburger.gojekuiclone.util.rx.RxBus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_tab_layout.view.*
@@ -95,11 +92,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                container.alpha = p3
-                favorites.alpha = 1 - (p3 * 3)
+                RxBus.getDefault().send(TransitionEvent(p3))
+                container.alpha = p3 * 4
+                favorites.alpha = 1 - (p3 * 4)
             }
 
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                if (p1 == R.id.mainStart) {
+                    container.alpha = 0f
+                }
             }
         })
     }

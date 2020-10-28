@@ -3,6 +3,7 @@ package com.mayburger.gojekuiclone.ui.base
 import android.content.ContentResolver
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
             this.baseActivity = activity
             activity?.onFragmentAttached()
         }
+    }
+
+    fun delay(delay: Long, runnable: ()->Unit) {
+        Handler().postDelayed({
+            runnable.invoke()
+        },delay)
     }
 
     override fun showBottomSheet(fragment: BaseFragment<*, *>, tag: String) {

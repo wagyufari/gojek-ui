@@ -1,6 +1,8 @@
 package com.mayburger.gojekuiclone.util.binding
 
+import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.mayburger.gojekuiclone.util.StringProvider
@@ -17,6 +19,22 @@ object TextViewBinding {
             Int.MAX_VALUE
         }
     }
+
+    @BindingAdapter("layout_height")
+    @JvmStatic
+    fun setLayoutHeight(view: View, height: Float) {
+        val layoutParams: LinearLayout.LayoutParams = view.layoutParams as LinearLayout.LayoutParams
+        layoutParams.height = height.toInt()
+        view.layoutParams = layoutParams
+    }
+    @BindingAdapter("layout_marginTop")
+    @JvmStatic
+    fun setMarginTop(view: View, margin: Float) {
+        val layoutParams: LinearLayout.LayoutParams = view.layoutParams as LinearLayout.LayoutParams
+        layoutParams.setMargins(layoutParams.leftMargin,margin.toInt(),layoutParams.rightMargin,layoutParams.bottomMargin)
+        view.layoutParams = layoutParams
+    }
+
 
     @BindingAdapter("nameAbbreviation")
     @JvmStatic
@@ -37,7 +55,7 @@ object TextViewBinding {
 
     @BindingAdapter("hintLocale")
     @JvmStatic
-    fun bindHint(view:EditText, str:String){
+    fun bindHint(view: EditText, str: String) {
         view.hint = StringProvider.getInstance().getString(str)
     }
 

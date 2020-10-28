@@ -12,12 +12,14 @@
         <import type="com.mayburger.gojekuiclone.constants.RecyclerConstants" />
 
         <import type="com.mayburger.gojekuiclone.constants.LocaleConstants" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <View
             android:id="@+id/div"
@@ -33,16 +35,20 @@
             android:id="@+id/favoritesTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/div">
 
             <com.mayburger.gojekuiclone.util.textfont.TextFont
+                layout_marginTop="@{viewModel.titleMarginTop}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:text="Your Favorites"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                app:layout_height="@{viewModel.titleHeight}"
                 app:typeface="bold" />
         </LinearLayout>
 
@@ -51,7 +57,7 @@
             android:id="@+id/favorites"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/favoritesTitle">
 
@@ -140,9 +146,14 @@
 
         <LinearLayout
             android:id="@+id/othersTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/favorites">
 
             <com.mayburger.gojekuiclone.util.textfont.TextFont
@@ -157,13 +168,14 @@
 
         <com.mayburger.gojekuiclone.util.textfont.TextFont
             android:id="@+id/foodTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Food delivery and shopping"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/othersTitle"
+            app:layout_constraintRight_toRightOf="@id/othersTitle"
             app:layout_constraintTop_toBottomOf="@id/othersTitle"
             app:typeface="medium" />
 

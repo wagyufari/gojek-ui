@@ -48,12 +48,11 @@
 
         </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
+        <com.mayburger.gojekuiclone.ui.CircleCardView
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="2dp"
+            android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <RelativeLayout
@@ -89,8 +88,8 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="40dp"
                                 android:id="@+id/goride"
+                                android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@drawable/goride" />
 
@@ -110,9 +109,9 @@
                             android:orientation="vertical">
 
                             <ImageView
+                                android:id="@+id/gocar"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:id="@+id/gocar"
                                 android:src="@drawable/gocar" />
 
                             <com.mayburger.gojekuiclone.util.textfont.TextFont
@@ -131,8 +130,8 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="40dp"
                                 android:id="@+id/gofood"
+                                android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@drawable/gofood" />
 
@@ -152,8 +151,8 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="40dp"
                                 android:id="@+id/goshop"
+                                android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@drawable/goshop" />
 
@@ -175,7 +174,7 @@
                     android:alpha="0"
                     android:background="@color/white" />
             </RelativeLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </com.mayburger.gojekuiclone.ui.CircleCardView>
 
         <RelativeLayout
             android:id="@+id/alpha"

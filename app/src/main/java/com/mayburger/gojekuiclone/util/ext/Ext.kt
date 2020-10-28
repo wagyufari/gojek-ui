@@ -32,6 +32,7 @@ fun ViewGroup.sheetBehavior():BottomSheetBehavior<*>{
     return BottomSheetBehavior.from(this)
 }
 
+
 fun MotionLayout.onTransitionEnd(trigger:(state:Int)->Unit){
     this.addTransitionListener(object:MotionLayout.TransitionListener{
         override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
@@ -42,6 +43,19 @@ fun MotionLayout.onTransitionEnd(trigger:(state:Int)->Unit){
         }
         override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
             trigger.invoke(p1)
+        }
+    })
+}
+fun MotionLayout.onTransitionProgress(trigger:(state:Float)->Unit){
+    this.addTransitionListener(object:MotionLayout.TransitionListener{
+        override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+        }
+        override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+        }
+        override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+            trigger.invoke(p3)
+        }
+        override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
         }
     })
 }

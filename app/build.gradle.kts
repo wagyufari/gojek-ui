@@ -96,6 +96,7 @@ dependencies {
 
     // view model
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("com.google.android.gms:play-services-maps:17.0.0")
     annotationProcessor("androidx.lifecycle:lifecycle-compiler:2.2.0")
 
     // Architectural Components
