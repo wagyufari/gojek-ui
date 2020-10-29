@@ -1,5 +1,6 @@
 package com.mayburger.gojekuiclone.util.ext
 
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.ProgressDialog
@@ -10,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -39,8 +41,65 @@ object ViewUtils {
         return progressDialog
     }
 
-    fun View.fadeHide(callback: (() -> Unit?)? =null){
-        ObjectAnimator.ofFloat(this,View.ALPHA,0f).apply {
+    fun View.flipX(
+            onFlip: (() -> Unit)? = {},
+            onEnd: (() -> Unit)? = {}) {
+        AnimatorSet().apply {
+            play(ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 1f).apply {
+                duration = 400
+                addListener(onEnd = {
+                    onEnd?.invoke()
+                })
+            }).after(ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 0f).apply {
+                duration = 400
+                addListener(onEnd={
+                    onFlip?.invoke()
+                })
+            })
+            start()
+        }
+    }
+
+    fun View.shake(){
+        this.startAnimation(AnimationUtils.loadAnimation(context,R.anim.shake))
+    }
+
+    fun View.shrinkHide(callback:(()->Unit)?={}){
+        AnimatorSet().apply {
+            play(ObjectAnimator.ofFloat(this@shrinkHide,View.SCALE_X,0f).apply {
+                duration = 300
+            })
+            play(ObjectAnimator.ofFloat(this@shrinkHide,View.SCALE_Y,0f).apply {
+                duration = 300
+                addListener(onEnd = {
+                    callback?.invoke()
+                    this@shrinkHide.visibility = View.GONE
+                })
+            })
+            start()
+        }
+    }
+    fun View.expandShow(callback:(()->Unit)?={}){
+        this.visibility = View.VISIBLE
+        this.scaleX = 0f
+        this.alpha = 1f
+        AnimatorSet().apply {
+            play(ObjectAnimator.ofFloat(this@expandShow,View.SCALE_X,1f).apply {
+                duration = 300
+            })
+            play(ObjectAnimator.ofFloat(this@expandShow,View.SCALE_Y,1f).apply {
+                duration = 300
+                addListener(onEnd = {
+                    callback?.invoke()
+                })
+            })
+            start()
+        }
+    }
+
+
+    fun View.fadeHide(callback: (() -> Unit?)? = null) {
+        ObjectAnimator.ofFloat(this, View.ALPHA, 0f).apply {
             duration = 700
             start()
             addListener(onEnd = {
@@ -49,13 +108,14 @@ object ViewUtils {
             })
         }
     }
-    fun View.fadeShow(callback: (() -> Unit?)? =null){
+
+    fun View.fadeShow(callback: (() -> Unit)?={}) {
         this.alpha = 0f
         this.visibility = View.VISIBLE
-        ObjectAnimator.ofFloat(this,View.ALPHA,1f).apply {
+        ObjectAnimator.ofFloat(this, View.ALPHA, 1f).apply {
             duration = 700
             start()
-            addListener(onEnd={
+            addListener(onEnd = {
                 callback?.invoke()
             })
         }
@@ -63,16 +123,16 @@ object ViewUtils {
 
     fun hideKeyboard(activity: Activity) {
         val imm = activity
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(
-            activity.findViewById<View>(R.id.content).windowToken,
-            0
+                activity.findViewById<View>(R.id.content).windowToken,
+                0
         )
     }
 
     fun showKeyboard(view: View) {
         val imm = view.context
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(view, 0)
     }
 
@@ -90,7 +150,7 @@ object ViewUtils {
 
 }
 
-fun Drawable.toBitmap(context:Context):Bitmap{
+fun Drawable.toBitmap(context: Context): Bitmap {
     val drawable = this
     var bitmap: Bitmap? = null
 
@@ -103,15 +163,15 @@ fun Drawable.toBitmap(context:Context):Bitmap{
 
     bitmap = if (drawable.intrinsicWidth <= 0 || drawable.intrinsicHeight <= 0) {
         Bitmap.createBitmap(
-            1,
-            1,
-            Bitmap.Config.ARGB_8888
+                1,
+                1,
+                Bitmap.Config.ARGB_8888
         ) // Single color bitmap will be created of 1x1 pixel
     } else {
         Bitmap.createBitmap(
-            drawable.intrinsicWidth,
-            drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
+                drawable.intrinsicWidth,
+                drawable.intrinsicHeight,
+                Bitmap.Config.ARGB_8888
         )
     }
 
@@ -121,16 +181,16 @@ fun Drawable.toBitmap(context:Context):Bitmap{
     return bitmap
 }
 
-fun TextView.setReadMore(rootNotes:View, showReadMore:ObservableBoolean, maxLine:ObservableField<Int>){
+fun TextView.setReadMore(rootNotes: View, showReadMore: ObservableBoolean, maxLine: ObservableField<Int>) {
     this.post {
         showReadMore.set(this.lineCount > 4)
-        if (showReadMore.get()){
+        if (showReadMore.get()) {
             maxLine.set(4)
             rootNotes.setOnClickListener {
-                if (maxLine.get() == 4){
+                if (maxLine.get() == 4) {
                     maxLine.set(Int.MAX_VALUE)
                     showReadMore.set(false)
-                } else{
+                } else {
                     maxLine.set(4)
                     showReadMore.set(true)
                 }
@@ -142,7 +202,7 @@ fun TextView.setReadMore(rootNotes:View, showReadMore:ObservableBoolean, maxLine
 fun Bitmap.getRoundedCornerBitmap(pixels: Int): Bitmap? {
     val bitmap = this
     val output = Bitmap.createBitmap(
-        bitmap.width, bitmap
+            bitmap.width, bitmap
             .height, Bitmap.Config.ARGB_8888
     )
     val canvas = Canvas(output)
@@ -163,16 +223,16 @@ fun Bitmap.getRoundedCornerBitmap(pixels: Int): Bitmap? {
 
 fun View.hideKeyboard() {
     val imm = this.context
-        .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(
-        (this.context as Activity).findViewById<View>(R.id.content).windowToken,
-        0
+            (this.context as Activity).findViewById<View>(R.id.content).windowToken,
+            0
     )
 }
 
 fun View.showKeyboard() {
     val imm = this.context
-        .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(this, 0)
 }
 

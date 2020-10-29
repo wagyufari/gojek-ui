@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="com.mayburger.gojekuiclone.ui.grabpay.GrabPayViewModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -25,12 +26,13 @@
             android:layout_margin="38dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradient_card" />
+                android:background="@drawable/ic_bg_card" />
 
             <ImageView
                 android:id="@+id/image"
@@ -74,6 +76,18 @@
                     android:src="@drawable/grabpay"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.mayburger.gojekuiclone.util.textfont.TextFont
+                    android:id="@+id/textLocked"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:text="Locked"
+                    android:textColor="@color/red_700"
+                    app:typeface="bold"
+                    android:visibility="@{viewModel.dataManager.grabCardLocked ? View.VISIBLE : View.GONE}"
+                    android:textSize="24sp"
+                    android:layout_height="wrap_content" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cardDetail"
@@ -150,14 +164,15 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="128dp"
             android:layout_marginEnd="16dp"
             android:background="@color/white"
             app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,6 +189,7 @@
                     android:background="@drawable/shp_circle_green100"
                     android:padding="16dp"
                     android:src="@drawable/ic_cardinfo"
+                    android:visibility="@{viewModel.dataManager.grabCardLocked ? View.GONE : View.VISIBLE}"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/cardLock"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -183,19 +199,19 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginTop="16dp"
-                    android:alpha="0"
                     android:background="@drawable/shp_circle_lightgrey"
                     android:padding="16dp"
-                    android:visibility="gone"
                     android:src="@drawable/ic_unlock_grey"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    android:visibility="@{viewModel.dataManager.grabCardLocked ? View.VISIBLE : View.GONE}"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/cardLock"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
+                    android:visibility="@{viewModel.dataManager.grabCardLocked ? View.GONE : View.VISIBLE}"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/shp_circle_green100"
                     android:padding="18dp"
@@ -207,6 +223,5 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

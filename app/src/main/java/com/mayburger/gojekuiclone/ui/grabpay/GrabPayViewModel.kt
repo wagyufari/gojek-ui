@@ -16,6 +16,8 @@ import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.mayburger.gojekuiclone.data.DataManager
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.flipX
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.activity_grab_pay.*
 
@@ -29,7 +31,6 @@ class GrabPayViewModel @ViewModelInject constructor(
     }
 
 
-
     companion object {
 
         fun playLines(drawable: Drawable) {
@@ -40,9 +41,9 @@ class GrabPayViewModel @ViewModelInject constructor(
             }
         }
 
-        fun GrabPayActivity.playLockCardAnimation(){
+        fun GrabPayActivity.playLockCardAnimation() {
             val animation = ValueAnimator.ofFloat(1f, 0f)
-            animation.duration = 2000
+            animation.duration = 1000
             animation.addUpdateListener {
                 val cm = ColorMatrix()
                 cm.setSaturation(animation.animatedValue as Float)
@@ -52,9 +53,10 @@ class GrabPayViewModel @ViewModelInject constructor(
             }
             animation.start()
         }
-        fun GrabPayActivity.playUnlockCardAnimation(){
+
+        fun GrabPayActivity.playUnlockCardAnimation() {
             val animation = ValueAnimator.ofFloat(0f, 1f)
-            animation.duration = 2000
+            animation.duration = 1000
             animation.addUpdateListener {
                 val cm = ColorMatrix()
                 cm.setSaturation(animation.animatedValue as Float)
@@ -67,69 +69,29 @@ class GrabPayViewModel @ViewModelInject constructor(
 
         fun GrabPayActivity.toCardDetail() {
             isAnimating = true
-            AnimatorSet().apply {
-                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 0.1f).apply {
-                    duration = 200
-                    addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationRepeat(p0: Animator?) {
-                        }
-
-                        override fun onAnimationEnd(p0: Animator?) {
-                            image.visibility = View.INVISIBLE
-                            image2.visibility = View.INVISIBLE
-                        }
-
-                        override fun onAnimationCancel(p0: Animator?) {
-                        }
-
-                        override fun onAnimationStart(p0: Animator?) {
-                        }
-                    })
-                })
-                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 1f).apply {
-                    duration = 200
-                }).after(200)
-                play(ObjectAnimator.ofFloat(cardDetail, View.ALPHA, 1f).apply {
-                    duration = 700
-                    addListener (onEnd = {
-                        isAnimating = false
-                    })
-                }).after(600)
-                start()
-            }
+            card.flipX(onFlip = {
+                image.visibility = View.INVISIBLE
+                image2.visibility = View.INVISIBLE
+                cardDetail.fadeShow {
+                    isAnimating = false
+                }
+            })
             state = 1
         }
 
-        fun GrabPayActivity.toMain() {
+        fun GrabPayActivity.toMain(onEnd:(()->Unit)?={}) {
             isAnimating = true
             AnimatorSet().apply {
-                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 0.1f).apply {
-                    duration = 200
-                    addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationRepeat(p0: Animator?) {
-                        }
-
-                        override fun onAnimationEnd(p0: Animator?) {
-                            cardDetail.alpha = 0f
-                        }
-
-                        override fun onAnimationCancel(p0: Animator?) {
-                        }
-
-                        override fun onAnimationStart(p0: Animator?) {
-                        }
-                    })
-                })
-                play(ObjectAnimator.ofFloat(card, View.SCALE_X, 1f).apply {
-                    duration = 200
-                }).after(200)
-                delay(200) {
+                card.flipX(onFlip = {
+                    cardDetail.alpha = 0f
+                }, onEnd = {
                     image2.visibility = View.VISIBLE
                     playLines(image2.drawable)
                     image.visibility = View.VISIBLE
                     playLines(image.drawable)
-                }
-                delay(1000){
+                    onEnd?.invoke()
+                })
+                delay(1000) {
                     isAnimating = false
                 }
                 start()
@@ -137,23 +99,20 @@ class GrabPayViewModel @ViewModelInject constructor(
             state = 0
         }
 
-        fun GrabPayActivity.playInitialAnimation(){
+        fun GrabPayActivity.playInitialAnimation() {
+            if(viewModel.dataManager.isGrabCardLocked){
+                playLockCardAnimation()
+            }
             delay(300) {
                 image2.visibility = View.VISIBLE
                 playLines(image2.drawable)
                 image.visibility = View.VISIBLE
                 playLines(image.drawable)
-                AnimatorSet().apply {
-                    play(ObjectAnimator.ofFloat(mastercard, View.ALPHA, 1f).apply {
-                        duration = 1000
-                    }).after(1000)
-                    play(ObjectAnimator.ofFloat(logo, View.ALPHA, 1f).apply {
-                        duration = 1000
-                        addListener (onEnd = {
-                            isAnimating = false
-                        })
-                    }).after(1000)
-                    start()
+                delay(500) {
+                    mastercard.fadeShow()
+                    logo.fadeShow {
+                        isAnimating = false
+                    }
                 }
             }
         }

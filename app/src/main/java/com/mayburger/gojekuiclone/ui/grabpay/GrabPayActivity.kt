@@ -1,6 +1,7 @@
 package com.mayburger.gojekuiclone.ui.grabpay
 
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import com.mayburger.gojekuiclone.BR
 import com.mayburger.gojekuiclone.R
@@ -11,8 +12,9 @@ import com.mayburger.gojekuiclone.ui.grabpay.GrabPayViewModel.Companion.playLock
 import com.mayburger.gojekuiclone.ui.grabpay.GrabPayViewModel.Companion.playUnlockCardAnimation
 import com.mayburger.gojekuiclone.ui.grabpay.GrabPayViewModel.Companion.toCardDetail
 import com.mayburger.gojekuiclone.ui.grabpay.GrabPayViewModel.Companion.toMain
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.expandShow
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.shake
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.shrinkHide
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_grab_pay.*
 
@@ -42,21 +44,29 @@ class GrabPayActivity : BaseActivity<ActivityGrabPayBinding, GrabPayViewModel>()
             }
         }
         cardLock.setOnClickListener {
+            viewModel.dataManager.isGrabCardLocked = true
             if (state == 1) {
-                toMain()
+                toMain {
+                    textLocked.expandShow()
+                }
+            } else {
+                textLocked.expandShow()
             }
-            cardInfo.fadeHide()
-            cardLock.fadeHide {
-                cardUnlock.fadeShow()
+            cardInfo.shrinkHide()
+            cardLock.shrinkHide {
+                cardUnlock.expandShow()
             }
+            card.shake()
             playLockCardAnimation()
         }
 
         cardUnlock.setOnClickListener {
-            cardUnlock.fadeHide {
-                cardInfo.fadeShow()
-                cardLock.fadeShow()
+            viewModel.dataManager.isGrabCardLocked = false
+            cardUnlock.shrinkHide {
+                cardInfo.expandShow()
+                cardLock.expandShow()
             }
+            textLocked.shrinkHide()
             playUnlockCardAnimation()
         }
     }
