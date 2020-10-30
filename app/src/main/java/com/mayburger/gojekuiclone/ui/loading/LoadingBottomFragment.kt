@@ -35,6 +35,8 @@ class LoadingBottomFragment : BaseBSDFragment<FragmentLoadingBottomBinding, Load
         isCancelable = false
         if(motionLayout.currentState == R.id.end){
             motionLayout.transitionToStart()
+        } else{
+            motionLayout.transitionToEnd()
         }
         motionLayout.onTransitionEnd {
             if (it == R.id.end) {
