@@ -2,7 +2,6 @@ package com.mayburger.gojekuiclone.ui.main
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -89,13 +88,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         TabLayoutMediator(tab, pager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.customView = getTabLayout("Promos", R.drawable.promos)
+                    tab.customView = getTabLayout("Promos", R.drawable.ic_promos)
                 }
                 1 -> {
-                    tab.customView = getTabLayout("Home", R.drawable.home)
+                    tab.customView = getTabLayout("Home", R.drawable.ic_home)
                 }
                 2 -> {
-                    tab.customView = getTabLayout("Chats", R.drawable.chat)
+                    tab.customView = getTabLayout("Chats", R.drawable.ic_chat)
                 }
             }
         }.attach()

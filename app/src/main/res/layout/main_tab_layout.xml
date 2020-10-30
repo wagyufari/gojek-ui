@@ -23,7 +23,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:padding="2dp"
-            android:src="@drawable/home" />
+            android:src="@drawable/ic_home" />
 
         <com.mayburger.gojekuiclone.util.textfont.TextFont
             android:id="@+id/title"
