@@ -170,6 +170,8 @@ dependencies {
 
     implementation("com.ogaclejapan.smarttablayout:library:2.0.0@aar")
 
+    implementation("androidx.palette:palette-ktx:1.0.0")
+
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
     kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
 

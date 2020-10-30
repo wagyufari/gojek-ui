@@ -20,7 +20,11 @@ import android.widget.TextView
 import androidx.core.animation.addListener
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.palette.graphics.Palette
 import com.mayburger.gojekuiclone.R
+import kotlinx.coroutines.CoroutineScope
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 object ViewUtils {
@@ -34,6 +38,24 @@ object ViewUtils {
 
     fun dpToPxFloat(dp: Float): Float {
         return (dp * Resources.getSystem().displayMetrics.density)
+    }
+
+    suspend fun Bitmap.isColorDark():Boolean{
+        return suspendCoroutine {cont->
+            Palette.generateAsync(this) {
+                val color = it?.getDominantColor(Color.parseColor("#2B2D2F"))?:0
+                cont.resume(isColorDark(color))
+            }
+        }
+    }
+
+    fun isColorDark(color: Int): Boolean {
+        val darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
+        return if (darkness < 0.5) {
+            false // It's a light color
+        } else {
+            true // It's a dark color
+        }
     }
 
     fun getProgressDialog(context: Context, message: CharSequence): ProgressDialog {

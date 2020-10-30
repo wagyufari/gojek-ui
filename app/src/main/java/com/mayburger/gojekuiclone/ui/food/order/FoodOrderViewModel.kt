@@ -75,7 +75,7 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f)
                         }).after(1000)
 
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 1f, 0.2f).apply {
+                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 1f, 0f).apply {
                             duration = 200
                             addListener(object : Animator.AnimatorListener {
                                 override fun onAnimationRepeat(p0: Animator?) {}
@@ -90,7 +90,7 @@ class FoodOrderViewModel @ViewModelInject constructor(
                                 }
                             })
                         }).after(1600)
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 0.2f, 1f).apply {
+                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 0f, 1f).apply {
                             duration = 200
                         }).after(1800)
                         play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 1f, 0.6f).apply {

@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="#EAECF0"
         app:layoutDescription="@xml/grab_pay_scene"
-        tools:context=".ui.grabpay.GrabPayActivity">
+        tools:context=".util.grabpay.GrabPayActivity">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"

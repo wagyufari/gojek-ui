@@ -1,10 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Gojek.Main" parent="Theme.Gojek">
+    <style name="Theme.Gojek.Main.Dark" parent="Theme.Gojek">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
-
-        <!-- Customize your theme here. -->
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="Theme.Gojek.Main.Light" parent="Theme.Gojek">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
     <style name="Theme.Gojek" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -17,7 +21,6 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

@@ -14,6 +14,8 @@
     <color name="green_100">#3331B057</color>
     <color name="green_700">#00880D</color>
 
+    <color name="test"></color>
+
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>

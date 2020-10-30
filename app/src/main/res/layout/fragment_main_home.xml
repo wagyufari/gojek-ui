@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mayburger.gojekuiclone.ui.main.fragments.home.MainHomeViewModel" />
+
+        <import type="com.mayburger.gojekuiclone.constants.RecyclerConstants" />
+
+        <import type="com.mayburger.gojekuiclone.constants.LocaleConstants" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp">
+
+        <LinearLayout
+            android:id="@+id/bottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <RelativeLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@drawable/shp_white_top_16dp">
+
+                <View
+                    android:id="@+id/div"
+                    android:layout_width="32dp"
+                    android:layout_height="4dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shp_circle_grey" />
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <LinearLayout
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/shp_background_search"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/profile"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="4dp"
+                        android:padding="10dp"
+                        android:src="@drawable/search" />
+
+                    <com.mayburger.gojekuiclone.util.textfont.TextFont
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:text="Search Gojek services..."
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/shp_circle_green700"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_profile_white"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/gopay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/shp_blue700_16dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/search">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shp_white_8dp"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/ic_gopay_text" />
+
+                        <com.mayburger.gojekuiclone.util.textfont.TextFont
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Payments made easy\nwith GoPay!"
+                            android:textColorHint="@color/colorTextGrey"
+                            android:ellipsize="end"
+                            android:textSize="11sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->viewModel.onClickPay()}"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:padding="2dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_pay" />
+
+                            <com.mayburger.gojekuiclone.util.textfont.TextFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pay"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:typeface="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:padding="2dp"
+                                android:src="@drawable/ic_topup" />
+
+                            <com.mayburger.gojekuiclone.util.textfont.TextFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Top Up"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:typeface="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:padding="2dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_explore" />
+
+                            <com.mayburger.gojekuiclone.util.textfont.TextFont
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Explore"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:typeface="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,8 +1,10 @@
 package com.mayburger.gojekuiclone.ui.base
 
 import android.annotation.TargetApi
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ContentResolver
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -46,6 +48,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
 
     override fun showBottomSheet(fragment: BaseFragment<*, *>, tag: String) {
 
+    }
+
+    open fun setLightStatusBar(view: View, activity: Activity) {
     }
 
     fun delay(delay: Long, runnable: ()->Unit) {

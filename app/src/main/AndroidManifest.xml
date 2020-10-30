@@ -16,10 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gojek">
-        <activity android:name=".ui.burgerswipe.BurgerActivity">
+        <activity android:name=".util.burgerswipe.BurgerActivity">
 
         </activity>
-        <activity android:name=".ui.grabpay.GrabPayActivity"></activity>
+        <activity android:name="com.mayburger.gojekuiclone.util.grabpay.GrabPayActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -35,8 +35,8 @@
         <activity android:name=".ui.food.FoodActivity">
         </activity>
         <activity
-            android:name=".ui.gojek.GojekActivity"
-            android:theme="@style/Theme.Gojek.Main">
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.Gojek.Main.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
