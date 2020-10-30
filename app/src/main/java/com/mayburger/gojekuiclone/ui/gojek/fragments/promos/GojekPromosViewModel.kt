@@ -1,4 +1,4 @@
-package com.mayburger.gojekuiclone.ui.food
+package com.mayburger.gojekuiclone.ui.gojek.fragments.promos
 
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 
@@ -7,14 +7,12 @@ import com.mayburger.gojekuiclone.data.DataManager
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 
 
-class FoodViewModel @ViewModelInject constructor(
-        dataManager: DataManager,
-        schedulerProvider: SchedulerProvider
+class GojekPromosViewModel @ViewModelInject constructor(
+    dataManager: DataManager,
+    schedulerProvider: SchedulerProvider
 ) :
-        BaseViewModel<FoodNavigator>(dataManager, schedulerProvider) {
+    BaseViewModel<GojekPromosNavigator>(dataManager, schedulerProvider) {
     override fun onEvent(obj: Any) {
     }
-
-
 
 }

@@ -23,10 +23,10 @@ import kotlinx.android.synthetic.main.activity_grab_pay.*
 
 
 class GrabPayViewModel @ViewModelInject constructor(
-        dataManager: DataManager,
-        schedulerProvider: SchedulerProvider
+    dataManager: DataManager,
+    schedulerProvider: SchedulerProvider
 ) :
-        BaseViewModel<GrabPayNavigator>(dataManager, schedulerProvider) {
+    BaseViewModel<GrabPayNavigator>(dataManager, schedulerProvider) {
     override fun onEvent(obj: Any) {
     }
 
@@ -72,14 +72,14 @@ class GrabPayViewModel @ViewModelInject constructor(
             card.flipX(onFlip = {
                 image.visibility = View.INVISIBLE
                 image2.visibility = View.INVISIBLE
-                cardDetail.fadeShow {
+                cardDetail.fadeShow(onEnd = {
                     isAnimating = false
-                }
+                })
             })
             state = 1
         }
 
-        fun GrabPayActivity.toMain(onEnd:(()->Unit)?={}) {
+        fun GrabPayActivity.toMain(onEnd: (() -> Unit)? = {}) {
             isAnimating = true
             AnimatorSet().apply {
                 card.flipX(onFlip = {
@@ -100,7 +100,7 @@ class GrabPayViewModel @ViewModelInject constructor(
         }
 
         fun GrabPayActivity.playInitialAnimation() {
-            if(viewModel.dataManager.isGrabCardLocked){
+            if (viewModel.dataManager.isGrabCardLocked) {
                 playLockCardAnimation()
             }
             delay(300) {
@@ -110,9 +110,9 @@ class GrabPayViewModel @ViewModelInject constructor(
                 playLines(image.drawable)
                 delay(500) {
                     mastercard.fadeShow()
-                    logo.fadeShow {
+                    logo.fadeShow(onEnd = {
                         isAnimating = false
-                    }
+                    })
                 }
             }
         }
