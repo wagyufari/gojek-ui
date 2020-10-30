@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.ContentResolver
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,12 @@ abstract class BaseBSDFragment<T : ViewDataBinding, V : BaseViewModel<*>> :
             this.baseActivity = activity
             activity?.onFragmentAttached()
         }
+    }
+
+    fun delay(delay: Long, runnable: ()->Unit) {
+        Handler().postDelayed({
+            runnable.invoke()
+        },delay)
     }
 
     override fun showBottomSheet(fragment: BaseFragment<*, *>, tag: String) {

@@ -28,68 +28,83 @@ fun Int.toStringJson(mContext: Context): String {
     return writer.toString()
 }
 
-fun ViewGroup.sheetBehavior():BottomSheetBehavior<*>{
+fun ViewGroup.sheetBehavior(): BottomSheetBehavior<*> {
     return BottomSheetBehavior.from(this)
 }
 
 
-fun MotionLayout.onTransitionEnd(trigger:(state:Int)->Unit){
-    this.addTransitionListener(object:MotionLayout.TransitionListener{
+fun MotionLayout.addTransitionListener(
+        onEnd: ((p0: MotionLayout?, p1: Int) -> Unit)? = null,
+        onTrigger: ((p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) -> Unit)? = null,
+        onStarted: ((p0: MotionLayout?, p1: Int, p2: Int) -> Unit)? = null,
+        onChange: ((p0: MotionLayout?, p1: Int, p2: Int, p3: Float) -> Unit)? = null,
+) {
+    this.setTransitionListener(object : MotionLayout.TransitionListener {
         override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            onTrigger?.invoke(p0,p1,p2,p3)
         }
+
         override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            onStarted?.invoke(p0,p1,p2)
         }
+
         override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+            onChange?.invoke(p0,p1,p2,p3)
         }
+
         override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-            trigger.invoke(p1)
+            onEnd?.invoke(p0,p1)
         }
     })
 }
-fun MotionLayout.onTransitionProgress(trigger:(progress:Float, end:Int)->Unit){
-    this.addTransitionListener(object:MotionLayout.TransitionListener{
+
+fun MotionLayout.onTransitionProgress(trigger: (progress: Float, end: Int) -> Unit) {
+    this.addTransitionListener(object : MotionLayout.TransitionListener {
         override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
         }
+
         override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
         }
+
         override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-            trigger.invoke(p3,p2)
+            trigger.invoke(p3, p2)
         }
+
         override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
         }
     })
 }
 
 
-fun View.setOnClickAnimate(drawable: Drawable?,runnable:Runnable){
+fun View.setOnClickAnimate(drawable: Drawable?, runnable: Runnable) {
     val view = this
     val initial = view.background
     view.setOnTouchListener { p0, p1 ->
         when (p1?.action) {
             MotionEvent.ACTION_DOWN -> {
                 val scaleDownX = ObjectAnimator.ofFloat(
-                    view,
-                    "scaleX", 0.9f
+                        view,
+                        "scaleX", 0.9f
                 );
                 val scaleDownY = ObjectAnimator.ofFloat(
-                    view,
-                    "scaleY", 0.9f
+                        view,
+                        "scaleY", 0.9f
                 );
                 scaleDownX.duration = 150;
                 scaleDownY.duration = 150;
                 val scaleDown = AnimatorSet();
                 scaleDown.play(scaleDownX).with(scaleDownY);
                 scaleDown.start();
-                drawable?.let{
+                drawable?.let {
                     view.background = it
                 }
             }
             MotionEvent.ACTION_UP -> {
                 val scaleDownX2 = ObjectAnimator.ofFloat(
-                    view, "scaleX", 1f
+                        view, "scaleX", 1f
                 );
                 val scaleDownY2 = ObjectAnimator.ofFloat(
-                    view, "scaleY", 1f
+                        view, "scaleY", 1f
                 );
                 scaleDownX2.duration = 300;
                 scaleDownY2.duration = 300;
@@ -99,16 +114,16 @@ fun View.setOnClickAnimate(drawable: Drawable?,runnable:Runnable){
                 scaleDown2.start();
                 runnable.run()
                 view.performClick()
-                drawable?.let{
+                drawable?.let {
                     view.background = initial
                 }
             }
             MotionEvent.ACTION_CANCEL -> {
                 val scaleDownX2 = ObjectAnimator.ofFloat(
-                    view, "scaleX", 1f
+                        view, "scaleX", 1f
                 );
                 val scaleDownY2 = ObjectAnimator.ofFloat(
-                    view, "scaleY", 1f
+                        view, "scaleY", 1f
                 );
                 scaleDownX2.duration = 300;
                 scaleDownY2.duration = 300;
@@ -116,7 +131,7 @@ fun View.setOnClickAnimate(drawable: Drawable?,runnable:Runnable){
                 val scaleDown2 = AnimatorSet();
                 scaleDown2.play(scaleDownX2).with(scaleDownY2);
                 scaleDown2.start();
-                drawable?.let{
+                drawable?.let {
                     view.background = initial
                 }
             }
@@ -124,19 +139,20 @@ fun View.setOnClickAnimate(drawable: Drawable?,runnable:Runnable){
         true
     }
 }
-fun View.setOnClickAnimate(drawable:Drawable){
+
+fun View.setOnClickAnimate(drawable: Drawable) {
     val view = this
     val initial = view.background
     view.setOnTouchListener { p0, p1 ->
         when (p1?.action) {
             MotionEvent.ACTION_DOWN -> {
                 val scaleDownX = ObjectAnimator.ofFloat(
-                    view,
-                    "scaleX", 0.9f
+                        view,
+                        "scaleX", 0.9f
                 );
                 val scaleDownY = ObjectAnimator.ofFloat(
-                    view,
-                    "scaleY", 0.9f
+                        view,
+                        "scaleY", 0.9f
                 );
                 scaleDownX.duration = 150;
                 scaleDownY.duration = 150;
@@ -147,10 +163,10 @@ fun View.setOnClickAnimate(drawable:Drawable){
             }
             MotionEvent.ACTION_UP -> {
                 val scaleDownX2 = ObjectAnimator.ofFloat(
-                    view, "scaleX", 1f
+                        view, "scaleX", 1f
                 );
                 val scaleDownY2 = ObjectAnimator.ofFloat(
-                    view, "scaleY", 1f
+                        view, "scaleY", 1f
                 );
                 scaleDownX2.duration = 300;
                 scaleDownY2.duration = 300;
@@ -163,10 +179,10 @@ fun View.setOnClickAnimate(drawable:Drawable){
             }
             MotionEvent.ACTION_CANCEL -> {
                 val scaleDownX2 = ObjectAnimator.ofFloat(
-                    view, "scaleX", 1f
+                        view, "scaleX", 1f
                 );
                 val scaleDownY2 = ObjectAnimator.ofFloat(
-                    view, "scaleY", 1f
+                        view, "scaleY", 1f
                 );
                 scaleDownX2.duration = 300;
                 scaleDownY2.duration = 300;
@@ -181,21 +197,24 @@ fun View.setOnClickAnimate(drawable:Drawable){
     }
 }
 
-fun <T> String.jsonToArraylistObject():ArrayList<T>{
+fun <T> String.jsonToArraylistObject(): ArrayList<T> {
     val json = this
-    return Gson().fromJson(json, object: TypeToken<ArrayList<T>>(){}.type)
+    return Gson().fromJson(json, object : TypeToken<ArrayList<T>>() {}.type)
 }
 
-fun BottomSheetBehavior<*>.hide(){
+fun BottomSheetBehavior<*>.hide() {
     this.state = BottomSheetBehavior.STATE_HIDDEN
 }
-fun BottomSheetBehavior<*>.collapse(){
+
+fun BottomSheetBehavior<*>.collapse() {
     this.state = BottomSheetBehavior.STATE_COLLAPSED
 }
-fun BottomSheetBehavior<*>.isShowing():Boolean{
+
+fun BottomSheetBehavior<*>.isShowing(): Boolean {
     return (this.state == BottomSheetBehavior.STATE_COLLAPSED || this.state == BottomSheetBehavior.STATE_EXPANDED)
 }
-fun BottomSheetBehavior<*>.show(){
+
+fun BottomSheetBehavior<*>.show() {
     this.state = BottomSheetBehavior.STATE_EXPANDED
 }
 

@@ -8,10 +8,9 @@ import androidx.fragment.app.viewModels
 import com.mayburger.gojekuiclone.BR
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.databinding.FragmentPaySuccessBinding
-import com.mayburger.gojekuiclone.ui.base.BaseBSDFragment
 import com.mayburger.gojekuiclone.ui.base.BaseFragment
 import com.mayburger.gojekuiclone.ui.pay.success.PaySuccessViewModel.Companion.playSuccessAnimation
-import com.mayburger.gojekuiclone.util.ext.onTransitionEnd
+import com.mayburger.gojekuiclone.util.ext.addTransitionListener
 import com.mayburger.gojekuiclone.util.ext.onTransitionProgress
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_food_order.*
@@ -46,14 +45,14 @@ class PaySuccessFragment : BaseFragment<FragmentPaySuccessBinding, PaySuccessVie
     override fun onBackPressed(fragment: Fragment) {
         motionLayout.setTransition(R.id.endToFinish)
         motionLayout.transitionToEnd()
-        motionLayout.onTransitionEnd {
-            if (it == R.id.finish) {
+        motionLayout.addTransitionListener(onEnd={ _, p1->
+            if (p1 == R.id.finish) {
                 if (!viewModel.isAnimating) {
                     requireActivity().supportFragmentManager.beginTransaction().remove(fragment)
-                        .commit()
+                            .commit()
                 }
             }
-        }
+        })
     }
 
 }
