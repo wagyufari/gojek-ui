@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.mayburger.gojekuiclone.BR
@@ -32,9 +33,11 @@ class LoadingBottomFragment : BaseBSDFragment<FragmentLoadingBottomBinding, Load
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isCancelable = false
-        motionLayout.transitionToEnd()
-        motionLayout.onTransitionEnd { end ->
-            if (end == R.id.end) {
+        if(motionLayout.currentState == R.id.end){
+            motionLayout.transitionToStart()
+        }
+        motionLayout.onTransitionEnd {
+            if (it == R.id.end) {
                 motionLayout.transitionToStart()
             } else {
                 motionLayout.transitionToEnd()
