@@ -1,6 +1,7 @@
 package com.mayburger.gojekuiclone.ui.main
 
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableField
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 
 import androidx.hilt.lifecycle.ViewModelInject
@@ -16,15 +17,6 @@ class MainViewModel @ViewModelInject constructor(
     override fun onEvent(obj: Any) {
     }
 
-    var labels: ObservableArrayList<String> = ObservableArrayList()
-
-    init {
-        labels.add("Hello")
-        labels.add("This")
-        labels.add("Is")
-        labels.add("My")
-        labels.add("Parent's")
-        labels.add("Account")
-    }
+    val homeBackground = ObservableField("https://i.ibb.co/GPSRGYn/homebackground.png")
 
 }

@@ -1,5 +1,6 @@
 package com.mayburger.gojekuiclone.data.hawk
 
+import android.graphics.Bitmap
 import com.orhanobut.hawk.Hawk
 import javax.inject.Inject
 

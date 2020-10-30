@@ -1,6 +1,8 @@
 package com.mayburger.gojekuiclone.ui.main
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -18,7 +20,7 @@ import com.mayburger.gojekuiclone.models.events.TransitionEvent
 import com.mayburger.gojekuiclone.ui.adapters.TabPagerAdapter
 import com.mayburger.gojekuiclone.ui.base.BaseActivity
 import com.mayburger.gojekuiclone.ui.food.FoodActivity
-import com.mayburger.gojekuiclone.ui.pay.PaySuccessFragment
+import com.mayburger.gojekuiclone.ui.pay.success.PaySuccessFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.chat.MainChatFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.home.MainHomeFragment
 import com.mayburger.gojekuiclone.ui.main.fragments.promos.MainPromosFragment
@@ -38,17 +40,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         get() = R.layout.activity_main
     override val viewModel: MainViewModel by viewModels()
 
+
+    companion object {
+        private const val EXTRA_THEME = "extra_theme"
+        fun startActivity(context: Context, theme: Int) {
+            context.apply {
+                startActivity(Intent(this, MainActivity::class.java).apply {
+                    putExtra(EXTRA_THEME, theme)
+                })
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-//        CoroutineScope(Main).launch{
-//            if(BitmapFactory.decodeResource(resources, R.drawable.cheese).isColorDark()){
-
-//            } else{
-//                setTheme(R.style.Theme_Gojek_Main_Dark);
-//            }
-//        }
+        setTheme(intent.getIntExtra(EXTRA_THEME, R.style.Theme_Gojek_Main_Light));
         super.onCreate(savedInstanceState)
-        setTheme(R.style.Theme_Gojek_Main_Dark);
-
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
@@ -95,7 +101,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         }.attach()
         pager.setCurrentItem(1, false)
 
-        supportFragmentManager.beginTransaction().apply{
+        supportFragmentManager.beginTransaction().apply {
             add(R.id.favoriteContainer, MainServicesFragment(), "")
             commit()
         }
@@ -122,9 +128,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     override fun onBackPressed() {
-        if(supportFragmentManager.fragments.filterIsInstance<PaySuccessFragment>().isNotEmpty()){
+        if (supportFragmentManager.fragments.filterIsInstance<PaySuccessFragment>().isNotEmpty()) {
             RxBus.getDefault().send(BackEvent(supportFragmentManager.fragments.filterIsInstance<PaySuccessFragment>()[0]))
-        } else{
+        } else {
             super.onBackPressed()
         }
     }

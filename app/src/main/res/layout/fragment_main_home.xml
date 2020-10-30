@@ -33,7 +33,7 @@
                 android:background="@drawable/shp_white_top_16dp">
 
                 <View
-                    android:id="@+id/div"
+                    android:id="@+id/topDecor"
                     android:layout_width="32dp"
                     android:layout_height="4dp"
                     android:layout_centerHorizontal="true"

@@ -8,6 +8,8 @@
         motion:constraintSetStart="@id/start"
         motion:duration="300" />
     <Transition
+        android:id="@+id/endToFinish"
+        motion:duration="150"
         motion:constraintSetEnd="@id/finish"
         motion:constraintSetStart="@id/end" />
 

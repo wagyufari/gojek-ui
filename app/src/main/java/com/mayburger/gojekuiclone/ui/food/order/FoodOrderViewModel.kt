@@ -12,6 +12,7 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.dpToPx
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_food_order.*
 
@@ -81,8 +82,9 @@ class FoodOrderViewModel @ViewModelInject constructor(
                                 override fun onAnimationRepeat(p0: Animator?) {}
                                 override fun onAnimationEnd(p0: Animator?) {
                                     fragment.card.cardElevation = 2f
-                                    fragment.image.setPadding(0, 0, 0, 0)
-                                    fragment.image.setImageResource(R.drawable.gofood)
+                                    fragment.image.setPadding(dpToPx(16),dpToPx(16),dpToPx(16),dpToPx(16))
+                                    fragment.card.setCardBackgroundColor(fragment.requireActivity().resources.getColor(R.color.red_200))
+                                    fragment.image.setImageResource(R.drawable.ic_gofood)
                                 }
 
                                 override fun onAnimationCancel(p0: Animator?) {}

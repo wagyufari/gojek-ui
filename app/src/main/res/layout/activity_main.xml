@@ -23,9 +23,10 @@
 
         <ImageView
             android:id="@+id/background"
+            imageUrl="@{viewModel.homeBackground}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/homebackground"
+            android:background="@color/colorTextGrey"
             app:layout_constraintHeight_percent="0.6" />
 
         <LinearLayout
@@ -39,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="24dp"
-                app:tabIndicatorHeight="0dp"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                app:tabIndicatorHeight="0dp" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
@@ -92,7 +93,9 @@
                                 android:id="@+id/goride"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/goride" />
+                                android:background="@drawable/shp_circle_green700"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_goride" />
 
                             <com.mayburger.gojekuiclone.util.textfont.TextFont
                                 android:layout_width="wrap_content"
@@ -113,7 +116,9 @@
                                 android:id="@+id/gocar"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/gocar" />
+                                android:background="@drawable/shp_circle_green700"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_gocar" />
 
                             <com.mayburger.gojekuiclone.util.textfont.TextFont
                                 android:layout_width="wrap_content"
@@ -134,7 +139,9 @@
                                 android:id="@+id/gofood"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/gofood" />
+                                android:background="@drawable/shp_circle_red200"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_gofood" />
 
                             <com.mayburger.gojekuiclone.util.textfont.TextFont
                                 android:layout_width="wrap_content"
@@ -155,7 +162,9 @@
                                 android:id="@+id/goshop"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/goshop" />
+                                android:background="@drawable/shp_circle_red200"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_goshop" />
 
                             <com.mayburger.gojekuiclone.util.textfont.TextFont
                                 android:layout_width="wrap_content"

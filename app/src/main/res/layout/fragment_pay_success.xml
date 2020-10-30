@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.mayburger.gojekuiclone.ui.pay.PaySuccessViewModel" />
+            type="com.mayburger.gojekuiclone.ui.pay.success.PaySuccessViewModel" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -14,6 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/gopay_success_scene">
+
+        <View
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <RelativeLayout
             android:id="@+id/background"
@@ -36,7 +41,7 @@
                 android:scaleX="0.5"
                 android:scaleY="0.5"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="200dp"
+                app:cardCornerRadius="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

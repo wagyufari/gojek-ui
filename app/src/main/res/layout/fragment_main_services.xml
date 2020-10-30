@@ -22,7 +22,7 @@
         android:padding="8dp">
 
         <View
-            android:id="@+id/div"
+            android:id="@+id/topDecor"
             android:layout_width="32dp"
             android:layout_height="4dp"
             android:layout_gravity="center_horizontal"
@@ -39,7 +39,7 @@
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/div">
+            app:layout_constraintTop_toBottomOf="@id/topDecor">
 
             <com.mayburger.gojekuiclone.util.textfont.TextFont
                 layout_marginTop="@{viewModel.titleMarginTop}"
@@ -71,7 +71,9 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/goride" />
+                    android:background="@drawable/shp_circle_green700"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_goride" />
 
                 <com.mayburger.gojekuiclone.util.textfont.TextFont
                     android:layout_width="wrap_content"
@@ -91,7 +93,9 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/gocar" />
+                    android:background="@drawable/shp_circle_green700"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_gocar" />
 
                 <com.mayburger.gojekuiclone.util.textfont.TextFont
                     android:layout_width="wrap_content"
@@ -111,7 +115,9 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/gofood" />
+                    android:background="@drawable/shp_circle_red200"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_gofood" />
 
                 <com.mayburger.gojekuiclone.util.textfont.TextFont
                     android:layout_width="wrap_content"
@@ -131,7 +137,9 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/goshop" />
+                    android:background="@drawable/shp_circle_red200"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_goshop" />
 
                 <com.mayburger.gojekuiclone.util.textfont.TextFont
                     android:layout_width="wrap_content"
