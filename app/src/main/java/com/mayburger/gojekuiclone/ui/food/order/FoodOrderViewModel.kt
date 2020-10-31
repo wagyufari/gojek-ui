@@ -1,16 +1,13 @@
 package com.mayburger.gojekuiclone.ui.food.order
 
-import android.animation.Animator
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.graphics.drawable.AnimatedVectorDrawable
-import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.animation.PathInterpolatorCompat
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
+import com.mayburger.gojekuiclone.models.events.BackEvent
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.dpToPx
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
@@ -29,11 +26,18 @@ class FoodOrderViewModel @ViewModelInject constructor(
 ) :
         BaseViewModel<FoodOrderNavigator>(dataManager, schedulerProvider) {
     override fun onEvent(obj: Any) {
+        when (obj) {
+            is BackEvent -> {
+                if (obj.obj is FoodOrderFragment) {
+                    navigator?.onBackPressed(obj.obj)
+                }
+            }
+        }
     }
-
 
     companion object {
         fun FoodOrderFragment.playOrderAnimation() {
+            isAnimating = true
             motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
                 override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
 
@@ -73,7 +77,9 @@ class FoodOrderViewModel @ViewModelInject constructor(
                         card.scale(0.6f,duration = 2500,after = 2500)
                         card.yToDp(270f,duration = 2500,after = 2500)
 
-                        background.fadeHide(duration=1200,after = 2500)
+                        background.fadeHide(duration=1200,after = 2500,onEnd = {
+                            isAnimating = false
+                        })
 
                         marker_foot.yToDp(245f,duration = 0)
                         marker_foot.fadeShow(after = 4800,duration = 300)

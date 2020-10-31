@@ -16,7 +16,7 @@ import com.mayburger.gojekuiclone.ui.base.BaseBSDFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PayReviewFragment: BaseBSDFragment<FragmentPayReviewBinding, PayReviewViewModel>(),
+class PayReviewFragment : BaseBSDFragment<FragmentPayReviewBinding, PayReviewViewModel>(),
         PayReviewNavigator {
 
     override val bindingVariable: Int
@@ -25,7 +25,7 @@ class PayReviewFragment: BaseBSDFragment<FragmentPayReviewBinding, PayReviewView
         get() = R.layout.fragment_pay_review
     override val viewModel: PayReviewViewModel by viewModels()
 
-    lateinit var onPay:()->Unit
+    lateinit var onPay: () -> Unit
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog =
@@ -48,6 +48,9 @@ class PayReviewFragment: BaseBSDFragment<FragmentPayReviewBinding, PayReviewView
     }
 
     override fun onClickPay() {
-        onPay.invoke()
+        viewModel.isLoading.set(true)
+        delay(1000) {
+            onPay.invoke()
+        }
     }
 }

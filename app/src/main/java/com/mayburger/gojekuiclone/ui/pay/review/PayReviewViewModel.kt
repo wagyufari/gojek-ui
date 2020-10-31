@@ -1,6 +1,7 @@
 package com.mayburger.gojekuiclone.ui.pay.review
 
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableBoolean
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 
 import androidx.hilt.lifecycle.ViewModelInject
@@ -20,6 +21,8 @@ class PayReviewViewModel @ViewModelInject constructor(
     fun onClickPay(){
         navigator?.onClickPay()
     }
+
+    val isLoading = ObservableBoolean(false)
 
 
 }

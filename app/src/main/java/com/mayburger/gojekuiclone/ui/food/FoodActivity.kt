@@ -11,8 +11,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.mayburger.gojekuiclone.BR
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.databinding.ActivityFoodBinding
+import com.mayburger.gojekuiclone.models.events.BackEvent
 import com.mayburger.gojekuiclone.ui.base.BaseActivity
 import com.mayburger.gojekuiclone.ui.food.order.FoodOrderFragment
+import com.mayburger.gojekuiclone.ui.pay.success.PaySuccessFragment
+import com.mayburger.gojekuiclone.util.rx.RxBus
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,10 +43,17 @@ class FoodActivity : BaseActivity<ActivityFoodBinding, FoodViewModel>(), FoodNav
             }
         }
 
-
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.filterIsInstance<FoodOrderFragment>().isNotEmpty()) {
+            RxBus.getDefault().send(BackEvent(supportFragmentManager.fragments.filterIsInstance<FoodOrderFragment>()[0]))
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

@@ -7,6 +7,8 @@
         <variable
             name="viewModel"
             type="com.mayburger.gojekuiclone.ui.pay.review.PayReviewViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -147,24 +149,68 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/pay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:layout_margin="16dp"
-            app:cardBackgroundColor="@color/green_700"
             android:onClick="@{()->viewModel.onClickPay()}"
+            app:cardBackgroundColor="@color/green_700"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-            <com.mayburger.gojekuiclone.util.textfont.TextFont
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="Confirm and Pay"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:typeface="bold" />
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <ProgressBar
+                    android:id="@+id/payProgress"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.mayburger.gojekuiclone.util.textfont.TextFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm &amp; Pay"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:visibility="@{!viewModel.isLoading()? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:typeface="bold" />
+
+
+                <com.mayburger.gojekuiclone.util.CircleArrow
+                    android:id="@+id/arrow"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:visibility="@{!viewModel.isLoading()? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.mayburger.gojekuiclone.util.textfont.TextFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Rp10.000"
+                    android:textColor="@color/white"
+                    android:visibility="@{!viewModel.isLoading()? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/arrow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:typeface="bold" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 

@@ -43,14 +43,16 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding, MainHomeViewModel
         LoadingBottomFragment().apply {
             show(this@MainHomeFragment.requireActivity().supportFragmentManager, "")
             delay(1000) {
-                if (isAnimating){
+                if (isAnimating) {
                     this.dismiss()
                     PayReviewFragment().apply {
                         onPay = {
                             dismiss()
-                            this@MainHomeFragment.requireActivity().supportFragmentManager.beginTransaction().apply {
-                                add(R.id.mainContainer, PaySuccessFragment(), "")
-                                commit()
+                            delay(100) {
+                                this@MainHomeFragment.requireActivity().supportFragmentManager.beginTransaction().apply {
+                                    add(R.id.mainContainer, PaySuccessFragment(), "")
+                                    commit()
+                                }
                             }
                         }
                         show(this@MainHomeFragment.requireActivity().supportFragmentManager, "")

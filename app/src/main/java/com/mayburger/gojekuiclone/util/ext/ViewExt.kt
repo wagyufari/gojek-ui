@@ -23,9 +23,6 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.palette.graphics.Palette
 import com.mayburger.gojekuiclone.R
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
-import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -252,12 +249,12 @@ object ViewUtils {
     }
 
 
-    fun View.fadeHide(callback: (() -> Unit)? = { }, duration: Long? = 700, after: Long? = 0) {
+    fun View.fadeHide(onEnd: (() -> Unit)? = { }, duration: Long? = 700, after: Long? = 0) {
         AnimatorSet().apply {
             play(ObjectAnimator.ofFloat(this@fadeHide, View.ALPHA, 0f).apply {
                 this.duration = duration ?: 700
                 addListener(onEnd = {
-                    callback?.invoke()
+                    onEnd?.invoke()
                     this@fadeHide.visibility = View.GONE
                 })
             }).after(after ?: 0)

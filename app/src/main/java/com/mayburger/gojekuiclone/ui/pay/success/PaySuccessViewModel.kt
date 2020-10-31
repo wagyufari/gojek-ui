@@ -7,8 +7,6 @@ import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
 import com.mayburger.gojekuiclone.models.events.BackEvent
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
-import com.mayburger.gojekuiclone.ui.pay.success.PaySuccessFragment
-import com.mayburger.gojekuiclone.ui.pay.success.PaySuccessNavigator
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
@@ -148,7 +146,7 @@ class PaySuccessViewModel @ViewModelInject constructor(
                     circle5.alpha = 1f
                     circle5.xToDp(70f, duration = 1000)
                     circle5.yToDp(-70f, percent = 30f, duration = 1000, onPercent = {
-                        circle5.fadeHide(duration = 500,callback={
+                        circle5.fadeHide(duration = 500,onEnd={
                             viewModel.isAnimating = false
                         })
                     })
