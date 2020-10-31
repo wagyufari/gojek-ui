@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.xToDp
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToX
 import com.mayburger.gojekuiclone.util.ext.bindView
 
 
@@ -26,19 +26,19 @@ class CircleArrow @JvmOverloads constructor(context: Context, attrs: AttributeSe
     fun animateChevrons() {
         delay(500){
             chevron2.fadeHide(duration = 500)
-            chevron2.xToDp(4f, duration = 700)
+            chevron2.animToX(4f, duration = 700)
             delay(200) {
                 chevron1.fadeHide(duration = 500)
-                chevron1.xToDp(4f, duration = 700)
+                chevron1.animToX(4f, duration = 700)
             }
             delay(700) {
                 chevron1.x = -2f
                 chevron2.x = -2f
                 chevron2.fadeShow(duration = 1000)
-                chevron2.xToDp(0f, duration = 1000)
+                chevron2.animToX(0f, duration = 1000)
                 delay(100) {
                     chevron1.fadeShow(duration = 1000)
-                    chevron1.xToDp(0f, duration = 1000)
+                    chevron1.animToX(0f, duration = 1000)
                     delay(300) {
                         animateChevrons()
                     }

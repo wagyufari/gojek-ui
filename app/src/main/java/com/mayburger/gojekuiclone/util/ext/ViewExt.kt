@@ -102,7 +102,7 @@ object ViewUtils {
         this.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
     }
 
-    fun View.yToDp(
+    fun View.animToY(
             y: Float,
             animate: Boolean? = true,
             after: Long? = 0,
@@ -113,7 +113,7 @@ object ViewUtils {
             interpolator: TimeInterpolator? = null
     ) {
         AnimatorSet().apply {
-            play(ObjectAnimator.ofFloat(this@yToDp, View.TRANSLATION_Y, dpToPxFloat(y)).apply {
+            play(ObjectAnimator.ofFloat(this@animToY, View.TRANSLATION_Y, dpToPxFloat(y)).apply {
                 this.duration = if (animate != false) duration ?: 500 else 0
                 Handler().postDelayed({
                     onPercent?.let {
@@ -132,7 +132,7 @@ object ViewUtils {
         }
     }
 
-    fun View.xToDp(
+    fun View.animToX(
             x: Float,
             animate: Boolean? = true,
             duration: Long? = 500,
@@ -141,7 +141,7 @@ object ViewUtils {
             onPercent: (() -> Unit)? = {}
     ) {
         AnimatorSet().apply {
-            play(ObjectAnimator.ofFloat(this@xToDp, View.TRANSLATION_X, dpToPxFloat(x)).apply {
+            play(ObjectAnimator.ofFloat(this@animToX, View.TRANSLATION_X, dpToPxFloat(x)).apply {
                 this.duration = if (animate != false) duration ?: 500 else 0
                 Handler().postDelayed({
                     onPercent?.invoke()
@@ -152,6 +152,10 @@ object ViewUtils {
             })
             start()
         }
+    }
+
+    fun View.animToAngle(angle:Double, radius:Float,duration: Long? = 500){
+
     }
 
     fun View.scale(scale: Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}, after: Long? = 0) {

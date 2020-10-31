@@ -11,8 +11,8 @@ import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.width
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.xToDp
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.yToDp
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToX
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_pay_success.*
 
@@ -49,103 +49,103 @@ class PaySuccessViewModel @ViewModelInject constructor(
                 card.scale(0.8f, duration = 300, onEnd = {
 
                     decor1.alpha = 1f
-                    decor1.yToDp(-50f, duration = 300)
-                    decor1.xToDp(50f, duration = 300)
+                    decor1.animToY(-50f, duration = 300)
+                    decor1.animToX(50f, duration = 300)
                     decor1.width(80, 300, onEnd = {
                         decor1.width(30, 400)
-                        decor1.yToDp(-70f, duration = 400)
-                        decor1.xToDp(70f, duration = 400)
+                        decor1.animToY(-70f, duration = 400)
+                        decor1.animToX(70f, duration = 400)
                         decor1.fadeHide(duration = 400)
                     })
 
                     decor2.alpha = 1f
-                    decor2.yToDp(-50f, duration = 300)
+                    decor2.animToY(-50f, duration = 300)
                     decor2.width(80, 300, onEnd = {
                         decor2.width(30, 400)
-                        decor2.yToDp(-70f, duration = 400)
+                        decor2.animToY(-70f, duration = 400)
                         decor2.fadeHide(duration = 400)
                     })
 
                     decor3.alpha = 1f
-                    decor3.yToDp(-50f, duration = 300)
-                    decor3.xToDp(-50f, duration = 300)
+                    decor3.animToY(-50f, duration = 300)
+                    decor3.animToX(-50f, duration = 300)
                     decor3.width(80, 300, onEnd = {
                         decor3.width(30, 400)
-                        decor3.yToDp(-70f, duration = 400)
-                        decor3.xToDp(-70f, duration = 400)
+                        decor3.animToY(-70f, duration = 400)
+                        decor3.animToX(-70f, duration = 400)
                         decor3.fadeHide(duration = 400)
                     })
 
                     decor4.alpha = 1f
-                    decor4.xToDp(-50f, duration = 300)
+                    decor4.animToX(-50f, duration = 300)
                     decor4.width(80, 300, onEnd = {
                         decor4.width(30, 400)
-                        decor4.xToDp(-70f, duration = 400)
+                        decor4.animToX(-70f, duration = 400)
                         decor4.fadeHide(duration = 400)
                     })
 
                     decor5.alpha = 1f
-                    decor5.yToDp(50f, duration = 300)
-                    decor5.xToDp(-50f, duration = 300)
+                    decor5.animToY(50f, duration = 300)
+                    decor5.animToX(-50f, duration = 300)
                     decor5.width(80, 300, onEnd = {
                         decor5.width(30, 400)
-                        decor5.yToDp(70f, duration = 400)
-                        decor5.xToDp(-70f, duration = 400)
+                        decor5.animToY(70f, duration = 400)
+                        decor5.animToX(-70f, duration = 400)
                         decor5.fadeHide(duration = 400)
                     })
 
                     decor6.alpha = 1f
-                    decor6.yToDp(50f, duration = 300)
+                    decor6.animToY(50f, duration = 300)
                     decor6.width(80, 300, onEnd = {
                         decor6.width(30, 400)
-                        decor6.yToDp(70f, duration = 400)
+                        decor6.animToY(70f, duration = 400)
                         decor6.fadeHide(duration = 400)
                     })
 
                     decor7.alpha = 1f
-                    decor7.yToDp(50f, duration = 300)
-                    decor7.xToDp(50f, duration = 300)
+                    decor7.animToY(50f, duration = 300)
+                    decor7.animToX(50f, duration = 300)
                     decor7.width(80, 300, onEnd = {
                         decor7.width(30, 400)
-                        decor7.yToDp(70f, duration = 400)
-                        decor7.xToDp(70f, duration = 400)
+                        decor7.animToY(70f, duration = 400)
+                        decor7.animToX(70f, duration = 400)
                         decor7.fadeHide(duration = 400)
                     })
 
                     decor8.alpha = 1f
-                    decor8.xToDp(50f, duration = 300)
+                    decor8.animToX(50f, duration = 300)
                     decor8.width(80, 300, onEnd = {
                         decor8.width(30, 400)
-                        decor8.xToDp(70f, duration = 400)
+                        decor8.animToX(70f, duration = 400)
                         decor8.fadeHide(duration = 400)
                     })
 
                     circle1.alpha = 1f
-                    circle1.yToDp(-140f, percent = 30f, duration = 1000, onPercent = {
+                    circle1.animToY(-140f, percent = 30f, duration = 1000, onPercent = {
                         circle1.fadeHide(duration = 500)
                     })
 
                     circle2.alpha = 1f
-                    circle2.xToDp(-80f, duration = 1000)
-                    circle2.yToDp(-40f, percent = 30f, duration = 1000, onPercent = {
+                    circle2.animToX(-80f, duration = 1000)
+                    circle2.animToY(-40f, percent = 30f, duration = 1000, onPercent = {
                         circle2.fadeHide(duration = 500)
                     })
 
                     circle3.alpha = 1f
-                    circle3.xToDp(-80f, duration = 1000)
-                    circle3.yToDp(40f, percent = 30f, duration = 1000, onPercent = {
+                    circle3.animToX(-80f, duration = 1000)
+                    circle3.animToY(40f, percent = 30f, duration = 1000, onPercent = {
                         circle3.fadeHide(duration = 500)
                     })
 
                     circle4.alpha = 1f
-                    circle4.xToDp(70f, duration = 1000)
-                    circle4.yToDp(70f, percent = 30f, duration = 1000, onPercent = {
+                    circle4.animToX(70f, duration = 1000)
+                    circle4.animToY(70f, percent = 30f, duration = 1000, onPercent = {
                         circle4.fadeHide(duration = 500)
                     })
 
                     circle5.alpha = 1f
-                    circle5.xToDp(70f, duration = 1000)
-                    circle5.yToDp(-70f, percent = 30f, duration = 1000, onPercent = {
+                    circle5.animToX(70f, duration = 1000)
+                    circle5.animToY(-70f, percent = 30f, duration = 1000, onPercent = {
                         circle5.fadeHide(duration = 500,onEnd={
                             viewModel.isAnimating = false
                         })

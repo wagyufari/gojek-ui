@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.mayburger.gojekuiclone.R
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.yToDp
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import kotlinx.android.synthetic.main.activity_burger.*
 
 class BurgerActivity : AppCompatActivity() {
@@ -29,12 +29,12 @@ class BurgerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_burger)
 
-        bunTop.yToDp(initialBunTop, false)
-        meat1.yToDp(initialMeat1, false)
-        cheese.yToDp(initialCheese, false)
-        meat2.yToDp(initialMeat2, false)
-        tomatoes.yToDp(initialTomatoes, false)
-        bunBottom.yToDp(initialBunBottom, false)
+        bunTop.animToY(initialBunTop, false)
+        meat1.animToY(initialMeat1, false)
+        cheese.animToY(initialCheese, false)
+        meat2.animToY(initialMeat2, false)
+        tomatoes.animToY(initialTomatoes, false)
+        bunBottom.animToY(initialBunBottom, false)
 
         swipeRefresh.setOnRefreshListener(object:SwipeRefreshLayout.OnRefreshListener{
             override fun onRefresh() {
@@ -42,21 +42,21 @@ class BurgerActivity : AppCompatActivity() {
             }
         })
 
-        bunTop.yToDp(-10f, percent = 20f, onPercent = {
-            meat1.yToDp(-10f, percent = 20f, onPercent = {
-                cheese.yToDp(-10f, percent = 20f, onPercent = {
-                    meat2.yToDp(-10f, percent = 20f, onPercent = {
-                        tomatoes.yToDp(-10f, percent = 20f, onPercent = {
-                            bunTop.yToDp(-10f, percent = 20f, onPercent = {
-                                bunBottom.yToDp(-10f, onEnd = {
+        bunTop.animToY(-10f, percent = 20f, onPercent = {
+            meat1.animToY(-10f, percent = 20f, onPercent = {
+                cheese.animToY(-10f, percent = 20f, onPercent = {
+                    meat2.animToY(-10f, percent = 20f, onPercent = {
+                        tomatoes.animToY(-10f, percent = 20f, onPercent = {
+                            bunTop.animToY(-10f, percent = 20f, onPercent = {
+                                bunBottom.animToY(-10f, onEnd = {
                                     delay(1000) {
-                                        bunTop.yToDp(endBunTop)
-                                        meat1.yToDp(endMeat1)
-                                        meat2.yToDp(endMeat2)
-                                        tomatoes.yToDp(endTomatoes)
-                                        bunBottom.yToDp(endBunBottom,onEnd={
-                                            favoriteContainer.yToDp(30f,percent=40f,onPercent = {
-                                                favoriteContainer.yToDp(-1000f)
+                                        bunTop.animToY(endBunTop)
+                                        meat1.animToY(endMeat1)
+                                        meat2.animToY(endMeat2)
+                                        tomatoes.animToY(endTomatoes)
+                                        bunBottom.animToY(endBunBottom,onEnd={
+                                            favoriteContainer.animToY(30f,percent=40f,onPercent = {
+                                                favoriteContainer.animToY(-1000f)
                                             })
                                         })
                                     }

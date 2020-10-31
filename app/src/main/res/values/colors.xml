@@ -5,7 +5,9 @@
     <color name="purple_700">#FF3700B3</color>
 
     <color name="blue_200">#00AFDE</color>
-    <color name="blue_700">#347896</color>
+    <color name="blue_500">#347896</color>
+    <color name="dark_blue_700">#2B54B6</color>
+
 
     <color name="red_200">#FF000E</color>
     <color name="red_700">#7D0000</color>
@@ -14,7 +16,7 @@
     <color name="green_100">#3331B057</color>
     <color name="green_700">#00880D</color>
 
-    <color name="test"></color>
+    <color name="yellow_200">#FFAD00</color>
 
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>

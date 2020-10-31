@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/firework0"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework1"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework2"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework3"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework4"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework5"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework6"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework7"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework8"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework9"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework10"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework11"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework12"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework13"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework14"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework15"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework21"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework22"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework23"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework24"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework25"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework26"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework27"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework28"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework29"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+    <View
+        android:id="@+id/firework210"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework211"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework212"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework213"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework214"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+    <View
+        android:id="@+id/firework215"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        android:alpha="0"
+        android:background="@drawable/shp_circle_green700" />
+
+
+
+</RelativeLayout>

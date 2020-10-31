@@ -32,5 +32,6 @@ class MainChatFragment : BaseFragment<FragmentMainChatBinding, MainChatViewModel
         val height = displayMetrics.heightPixels
         behavior.peekHeight = height/2
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
     }
 }

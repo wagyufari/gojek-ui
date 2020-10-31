@@ -28,6 +28,11 @@ class FoodOrderFragment : BaseFragment<FragmentFoodOrderBinding, FoodOrderViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.navigator = this
+
+        fireworkRed.setFireworkResource(R.drawable.shp_circle_red200)
+        fireworkBlue.setFireworkResource(R.drawable.shp_circle_blue700)
+        fireworkYellow.setFireworkResource(R.drawable.shp_circle_yellow200)
+
         card.setOnClickListener {
             if (motionLayout.currentState == R.id.start) {
                 textOrder.visibility = View.GONE

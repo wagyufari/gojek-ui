@@ -64,7 +64,7 @@
                         android:layout_height="38dp"
                         android:layout_marginStart="4dp"
                         android:padding="10dp"
-                        android:src="@drawable/search" />
+                        android:src="@drawable/ic_search" />
 
                     <com.mayburger.gojekuiclone.util.textfont.TextFont
                         android:layout_width="match_parent"
