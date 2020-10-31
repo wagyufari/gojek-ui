@@ -13,6 +13,12 @@ import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.dpToPx
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.flipX
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleY
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.yToDp
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_food_order.*
 
@@ -26,102 +32,58 @@ class FoodOrderViewModel @ViewModelInject constructor(
     }
 
 
-    fun playOrderAnimation(fragment: FoodOrderFragment){
-        fragment.motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
-            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+    companion object {
+        fun FoodOrderFragment.playOrderAnimation() {
+            motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
+                override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
 
-            }
+                }
 
-            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-            }
+                override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+                }
 
-            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                if (p3 > 0.8) {
-                    AnimatorSet().apply {
-                        fragment.image.setImageResource(R.drawable.ic_done)
-                        val drawable = fragment.image.drawable
+                override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+                    if (p3 > 0.8) {
+                        image.setImageResource(R.drawable.ic_done)
+                        val drawable = image.drawable
                         if (drawable is AnimatedVectorDrawableCompat) {
                             drawable.start()
                         } else if (drawable is AnimatedVectorDrawable) {
                             drawable.start()
                         }
 
-                        play(ObjectAnimator.ofFloat(fragment.text, View.TRANSLATION_Y, 50f, 0f).apply {
-                            duration = 500
+                        text.yToDp(20f, duration = 500)
+                        text.fadeShow(duration = 500, onEnd = {
+                            delay(1000) {
+                                text.yToDp(0f, duration = 500)
+                                text.fadeHide(duration = 500)
+                            }
                         })
-                        play(ObjectAnimator.ofFloat(fragment.text, View.ALPHA, 0f, 1f).apply {
-                            duration = 500
+
+                        card.yToDp(250f, duration = 1300, interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f))
+                        card.scaleY(0.6f, duration = 200, after = 800)
+                        card.scaleY(1f, duration = 200, after = 1000)
+                        card.yToDp(0f, duration = 1300, after = 1000, interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f))
+                        card.flipX(duration = 200, after = 700, onFlip = {
+                            card.cardElevation = 2f
+                            image.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16))
+                            card.setCardBackgroundColor(requireActivity().resources.getColor(R.color.red_200))
+                            image.setImageResource(R.drawable.ic_gofood)
                         })
+                        card.scale(0.6f,duration = 2500,after = 2500)
+                        card.yToDp(270f,duration = 2500,after = 2500)
 
-                        play(ObjectAnimator.ofFloat(fragment.text, View.TRANSLATION_Y, 0f, 50f).apply {
-                            duration = 500
-                        }).after(1800)
-                        play(ObjectAnimator.ofFloat(fragment.text, View.ALPHA, 1f, 0f).apply {
-                            duration = 500
-                        }).after(1800)
+                        background.fadeHide(duration=1200,after = 2500)
 
-                        play(ObjectAnimator.ofFloat(fragment.card, View.TRANSLATION_Y, 0f, 700f).apply {
-                            duration = 1300
-                            interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f)
-                        })
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_Y, 1f, 0.7f).apply {
-                            duration = 100
-                        }).after(800)
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_Y, 0.7f, 1f).apply {
-                            duration = 200
-                        }).after(1000)
-
-                        play(ObjectAnimator.ofFloat(fragment.card, View.TRANSLATION_Y, 700f, 0f).apply {
-                            duration = 1300
-                            interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f)
-                        }).after(1000)
-
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 1f, 0f).apply {
-                            duration = 200
-                            addListener(object : Animator.AnimatorListener {
-                                override fun onAnimationRepeat(p0: Animator?) {}
-                                override fun onAnimationEnd(p0: Animator?) {
-                                    fragment.card.cardElevation = 2f
-                                    fragment.image.setPadding(dpToPx(16),dpToPx(16),dpToPx(16),dpToPx(16))
-                                    fragment.card.setCardBackgroundColor(fragment.requireActivity().resources.getColor(R.color.red_200))
-                                    fragment.image.setImageResource(R.drawable.ic_gofood)
-                                }
-
-                                override fun onAnimationCancel(p0: Animator?) {}
-                                override fun onAnimationStart(p0: Animator?) {
-                                }
-                            })
-                        }).after(1600)
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 0f, 1f).apply {
-                            duration = 200
-                        }).after(1800)
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_X, 1f, 0.6f).apply {
-                            duration = 2000
-                        }).after(2500)
-                        play(ObjectAnimator.ofFloat(fragment.card, View.SCALE_Y, 1f, 0.6f).apply {
-                            duration = 2000
-                        }).after(2500)
-                        play(ObjectAnimator.ofFloat(fragment.card, View.TRANSLATION_Y, 0f, 700f).apply {
-                            duration = 2000
-                        }).after(2500)
-
-                        play(ObjectAnimator.ofFloat(fragment.background,View.ALPHA, 1f,0f).apply{
-                            duration = 1200
-                        }).after(2500)
-
-                        play(ObjectAnimator.ofFloat(fragment.marker_foot, View.TRANSLATION_Y, 0f, 630f))
-                        play(ObjectAnimator.ofFloat(fragment.marker_foot, View.ALPHA, 0f, 1f).apply {
-                            duration = 500
-                        }).after(4300)
-                        start()
+                        marker_foot.yToDp(245f,duration = 0)
+                        marker_foot.fadeShow(after = 4800,duration = 300)
                     }
-
                 }
-            }
 
-            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-            }
-        })
+                override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                }
+            })
+        }
+
     }
-
 }

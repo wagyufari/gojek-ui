@@ -7,6 +7,7 @@ import com.mayburger.gojekuiclone.BR
 import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.databinding.FragmentFoodOrderBinding
 import com.mayburger.gojekuiclone.ui.base.BaseFragment
+import com.mayburger.gojekuiclone.ui.food.order.FoodOrderViewModel.Companion.playOrderAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_food_order.*
 
@@ -26,11 +27,11 @@ class FoodOrderFragment : BaseFragment<FragmentFoodOrderBinding, FoodOrderViewMo
             if (motionLayout.currentState == R.id.start) {
                 textOrder.visibility = View.GONE
                 progressOrder.visibility = View.VISIBLE
-                delay(2000) {
+                delay(300) {
                     progressOrder.visibility = View.GONE
                     motionLayout.transitionToEnd()
                 }
-                viewModel.playOrderAnimation(this@FoodOrderFragment)
+                playOrderAnimation()
             }
         }
     }
