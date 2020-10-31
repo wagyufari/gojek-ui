@@ -1,6 +1,7 @@
 package com.mayburger.gojekuiclone.ui.food
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -14,6 +15,7 @@ import com.mayburger.gojekuiclone.databinding.ActivityFoodBinding
 import com.mayburger.gojekuiclone.models.events.BackEvent
 import com.mayburger.gojekuiclone.ui.base.BaseActivity
 import com.mayburger.gojekuiclone.ui.food.order.FoodOrderFragment
+import com.mayburger.gojekuiclone.ui.main.MainActivity
 import com.mayburger.gojekuiclone.ui.pay.success.PaySuccessFragment
 import com.mayburger.gojekuiclone.util.rx.RxBus
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +34,12 @@ class FoodActivity : BaseActivity<ActivityFoodBinding, FoodViewModel>(), FoodNav
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Gojek_Main_Light);
         super.onCreate(savedInstanceState)
+        window.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
 
         // LE COMPLEX ANIMATION ALGORITHMS
 
