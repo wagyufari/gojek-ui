@@ -16,6 +16,7 @@ import com.mayburger.gojekuiclone.util.ext.ViewUtils.flipX
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleY
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleAnimY
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_food_order.*
 
@@ -64,14 +65,14 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             }
                         })
 
-                        fireworkRed.fadeShow(duration = 200)
-                        fireworkRed.start()
-                        fireworkBlue.fadeShow(duration = 200)
-                        fireworkBlue.start()
-                        fireworkYellow.fadeShow(duration = 200)
-                        fireworkYellow.start()
-                        fireworkGreen.fadeShow(duration = 200)
-                        fireworkGreen.start()
+//                        fireworkRed.fadeShow(duration = 200)
+//                        fireworkRed.start()
+//                        fireworkBlue.fadeShow(duration = 200)
+//                        fireworkBlue.start()
+//                        fireworkYellow.fadeShow(duration = 200)
+//                        fireworkYellow.start()
+//                        fireworkGreen.fadeShow(duration = 200)
+//                        fireworkGreen.start()
 
                         card.animToY(250f, duration = 1300, interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f))
                         card.scaleY(0.6f, duration = 200, after = 800)
@@ -83,8 +84,7 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             card.setCardBackgroundColor(requireActivity().resources.getColor(R.color.red_200))
                             image.setImageResource(R.drawable.ic_gofood)
                         })
-                        card.scale(0.6f,duration = 2500,after = 2500)
-                        card.animToY(270f,duration = 2500,after = 2500)
+                        card.scaleAnimY(0.6f,y=270f,duration = 1300,after = 2500)
 
                         background.fadeHide(duration=1200,after = 2500,onEnd = {
                             isAnimating = false
@@ -95,7 +95,7 @@ class FoodOrderViewModel @ViewModelInject constructor(
                         })
 
                         marker_foot.animToY(245f,duration = 0)
-                        marker_foot.fadeShow(after = 4800,duration = 300)
+                        marker_foot.fadeShow(after = 3800,duration = 300)
                     }
                 }
 

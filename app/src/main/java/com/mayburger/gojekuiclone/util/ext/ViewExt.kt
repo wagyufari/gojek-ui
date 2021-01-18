@@ -23,6 +23,7 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.palette.graphics.Palette
 import com.mayburger.gojekuiclone.R
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -164,6 +165,26 @@ object ViewUtils {
                 this.duration = duration ?: 1000
             }).after(after ?: 0)
             play(ObjectAnimator.ofFloat(this@scale, View.SCALE_Y, scale).apply {
+                this.duration = duration ?: 1000
+                addListener(onEnd = {
+                    onEnd?.invoke()
+                })
+            }).after(after ?: 0)
+            start()
+        }
+    }
+    fun View.scaleAnimY(scale: Float,y:Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}, after: Long? = 0) {
+        AnimatorSet().apply {
+            play(ObjectAnimator.ofFloat(this@scaleAnimY, View.SCALE_X, scale).apply {
+                this.duration = duration ?: 1000
+            }).after(after ?: 0)
+            play(ObjectAnimator.ofFloat(this@scaleAnimY, View.SCALE_Y, scale).apply {
+                this.duration = duration ?: 1000
+                addListener(onEnd = {
+                    onEnd?.invoke()
+                })
+            }).after(after ?: 0)
+            play(ObjectAnimator.ofFloat(this@scaleAnimY, View.TRANSLATION_Y, dpToPxFloat(y)).apply {
                 this.duration = duration ?: 1000
                 addListener(onEnd = {
                     onEnd?.invoke()
