@@ -1,5 +1,6 @@
 package com.mayburger.gojekuiclone.ui.food.order
 
+import android.animation.ValueAnimator
 import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.animation.PathInterpolatorCompat
@@ -9,14 +10,13 @@ import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
 import com.mayburger.gojekuiclone.models.events.BackEvent
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.dpToPx
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.flipX
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleY
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleAnimY
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleY
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_food_order.*
 
@@ -37,7 +37,12 @@ class FoodOrderViewModel @ViewModelInject constructor(
     }
 
     companion object {
+
         fun FoodOrderFragment.playOrderAnimation() {
+            val vaClass = Class.forName("android.animation.ValueAnimator")
+            val method = vaClass.getMethod("setDurationScale",Float::class.java)
+            method.invoke(null, 0.5f)
+
             isAnimating = true
             motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
                 override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
@@ -84,9 +89,9 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             card.setCardBackgroundColor(requireActivity().resources.getColor(R.color.red_200))
                             image.setImageResource(R.drawable.ic_gofood)
                         })
-                        card.scaleAnimY(0.6f,y=270f,duration = 1300,after = 2500)
+                        card.scaleAnimY(0.6f, y = 270f, duration = 1300, after = 2500)
 
-                        background.fadeHide(duration=1200,after = 2500,onEnd = {
+                        background.fadeHide(duration = 1200, after = 2500, onEnd = {
                             isAnimating = false
                             root.removeView(fireworkBlue)
                             root.removeView(fireworkRed)
@@ -94,8 +99,8 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             root.removeView(fireworkGreen)
                         })
 
-                        marker_foot.animToY(245f,duration = 0)
-                        marker_foot.fadeShow(after = 3800,duration = 300)
+                        marker_foot.animToY(245f, duration = 0)
+                        marker_foot.fadeShow(after = 3800, duration = 300)
                     }
                 }
 
