@@ -202,8 +202,8 @@
 
             <View
                 android:id="@+id/circle5"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:alpha="0"
                 android:background="@drawable/shp_circle_white"
                 app:layout_constraintBottom_toBottomOf="parent"
