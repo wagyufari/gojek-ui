@@ -23,9 +23,12 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.palette.graphics.Palette
 import com.mayburger.gojekuiclone.R
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToX
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import kotlin.math.cos
+import kotlin.math.sin
 
 
 object ViewUtils {
@@ -103,6 +106,12 @@ object ViewUtils {
         this.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shake))
     }
 
+    fun View.animToAngle(angle:Double, radius:Float,percent: Float? = 100f,
+                         onPercent: (() -> Unit)? = {},){
+        animToX((cos(Math.toRadians((angle))).toFloat()) * radius, duration = 2000,percent = percent,onPercent = onPercent)
+        animToY((sin(Math.toRadians((angle))).toFloat()) * radius, duration = 2000)
+    }
+
     fun View.animToY(
             y: Float,
             animate: Boolean? = true,
@@ -125,6 +134,43 @@ object ViewUtils {
                 addListener(onEnd = {
                     onEnd?.invoke()
                 })
+                interpolator?.let {
+                    this.interpolator = it
+                }
+            }).after(after ?: 0)
+            start()
+        }
+    }
+
+    fun View.animToXY(
+            x: Float,
+            y: Float,
+            animate: Boolean? = true,
+            after: Long? = 0,
+            duration: Long? = 500,
+            onEnd: (() -> Unit)? = {},
+            percent: Float? = 100f,
+            onPercent: (() -> Unit)? = {},
+            interpolator: TimeInterpolator? = null
+    ) {
+        AnimatorSet().apply {
+            play(ObjectAnimator.ofFloat(this@animToXY, View.TRANSLATION_Y, dpToPxFloat(y)).apply {
+                this.duration = if (animate != false) duration ?: 500 else 0
+                Handler().postDelayed({
+                    onPercent?.let {
+                        it.invoke()
+                        this.cancel()
+                    }
+                }, ((duration ?: 500).times(percent ?: 100f) / 100).toLong())
+                addListener(onEnd = {
+                    onEnd?.invoke()
+                })
+                interpolator?.let {
+                    this.interpolator = it
+                }
+            }).after(after ?: 0)
+            play(ObjectAnimator.ofFloat(this@animToXY, View.TRANSLATION_X, dpToPxFloat(x)).apply {
+                this.duration = if (animate != false) duration ?: 500 else 0
                 interpolator?.let {
                     this.interpolator = it
                 }

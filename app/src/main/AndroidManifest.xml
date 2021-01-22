@@ -34,15 +34,15 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".ui.food.FoodActivity">
+        </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.Gojek.Main.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:theme="@style/Theme.Gojek.Main.Light">
         </activity>
     </application>
 

@@ -7,12 +7,15 @@ import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.data.DataManager
 import com.mayburger.gojekuiclone.models.events.BackEvent
 import com.mayburger.gojekuiclone.ui.base.BaseViewModel
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToAngle
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.width
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToX
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToXY
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.dpToPxFloat
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_pay_success.*
 
@@ -121,31 +124,30 @@ class PaySuccessViewModel @ViewModelInject constructor(
                     })
 
                     circle1.alpha = 1f
-                    circle1.animToY(-140f, percent = 30f, duration = 1000, onPercent = {
+//                    circle1.animToY(-140f, percent = 30f, duration = 1000, onPercent = {
+//                    circle1.fadeHide(duration = 500)
+//                    })
+                    circle1.animToAngle(20.0, dpToPxFloat(60f), percent = 30f, onPercent = {
                         circle1.fadeHide(duration = 500)
                     })
 
                     circle2.alpha = 1f
-                    circle2.animToX(-80f, duration = 1000)
-                    circle2.animToY(-40f, percent = 30f, duration = 1000, onPercent = {
+                    circle2.animToXY(-80f,-40f, percent = 30f, duration = 1000, onPercent = {
                         circle2.fadeHide(duration = 500)
                     })
 
                     circle3.alpha = 1f
-                    circle3.animToX(-80f, duration = 1000)
-                    circle3.animToY(40f, percent = 30f, duration = 1000, onPercent = {
+                    circle3.animToXY(-80f,40f, percent = 30f, duration = 1000, onPercent = {
                         circle3.fadeHide(duration = 500)
                     })
 
                     circle4.alpha = 1f
-                    circle4.animToX(70f, duration = 1000)
-                    circle4.animToY(70f, percent = 30f, duration = 1000, onPercent = {
+                    circle4.animToXY(70f,70f, percent = 30f, duration = 1000, onPercent = {
                         circle4.fadeHide(duration = 500)
                     })
 
                     circle5.alpha = 1f
-                    circle5.animToX(70f, duration = 1000)
-                    circle5.animToY(-70f, percent = 30f, duration = 1000, onPercent = {
+                    circle5.animToXY(70f,-70f, percent = 30f, duration = 1000, onPercent = {
                         circle5.fadeHide(duration = 500,onEnd={
                             viewModel.isAnimating = false
                         })

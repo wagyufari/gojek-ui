@@ -157,11 +157,10 @@
                 android:alpha="0"
                 android:background="@drawable/shp_circle_white"
                 android:rotation="-90"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintCircle="@id/image"
-                app:layout_constraintCircleAngle="20"
-                app:layout_constraintCircleRadius="60dp"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/image"
+                app:layout_constraintRight_toRightOf="@id/image"
+                app:layout_constraintBottom_toBottomOf="@id/image"
+                app:layout_constraintLeft_toLeftOf="@id/image" />
 
             <View
                 android:id="@+id/circle2"
@@ -203,8 +202,8 @@
 
             <View
                 android:id="@+id/circle5"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:alpha="0"
                 android:background="@drawable/shp_circle_white"
                 app:layout_constraintBottom_toBottomOf="parent"

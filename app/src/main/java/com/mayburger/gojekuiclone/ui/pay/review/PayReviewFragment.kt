@@ -49,7 +49,7 @@ class PayReviewFragment : BaseBSDFragment<FragmentPayReviewBinding, PayReviewVie
 
     override fun onClickPay() {
         viewModel.isLoading.set(true)
-        delay(1000) {
+        delay(100) {
             onPay.invoke()
         }
     }

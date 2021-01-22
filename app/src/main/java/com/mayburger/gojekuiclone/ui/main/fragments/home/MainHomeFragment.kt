@@ -42,7 +42,7 @@ class MainHomeFragment : BaseFragment<FragmentMainHomeBinding, MainHomeViewModel
     override fun onClickPay() {
         LoadingBottomFragment().apply {
             show(this@MainHomeFragment.requireActivity().supportFragmentManager, "")
-            delay(1000) {
+            delay(100) {
                 if (isAnimating) {
                     this.dismiss()
                     PayReviewFragment().apply {

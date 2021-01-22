@@ -70,19 +70,19 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             }
                         })
 
-//                        fireworkRed.fadeShow(duration = 200)
-//                        fireworkRed.start()
-//                        fireworkBlue.fadeShow(duration = 200)
-//                        fireworkBlue.start()
-//                        fireworkYellow.fadeShow(duration = 200)
-//                        fireworkYellow.start()
-//                        fireworkGreen.fadeShow(duration = 200)
-//                        fireworkGreen.start()
+                        fireworkRed.fadeShow(duration = 200)
+                        fireworkRed.start()
+                        fireworkBlue.fadeShow(duration = 200)
+                        fireworkBlue.start()
+                        fireworkYellow.fadeShow(duration = 200)
+                        fireworkYellow.start()
+                        fireworkGreen.fadeShow(duration = 200)
+                        fireworkGreen.start()
 
-                        card.animToY(250f, duration = 1300, interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f))
-                        card.scaleY(0.6f, duration = 200, after = 800)
-                        card.scaleY(1f, duration = 200, after = 1000)
-                        card.animToY(0f, duration = 1300, after = 1000, interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f))
+                        card.animToY(250f, duration = 1000, interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f))
+                        card.scaleY(0.4f, duration = 300, after = 800)
+                        card.scaleY(1f, duration = 200, after = 1200)
+                        card.animToY(0f, duration = 1200, after = 1000, interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f))
                         card.flipX(duration = 200, after = 700, onFlip = {
                             card.cardElevation = 2f
                             image.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16))
