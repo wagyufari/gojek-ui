@@ -1,6 +1,7 @@
 package com.mayburger.gojekuiclone.ui.food.order
 
 import android.animation.ValueAnimator
+import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.animation.PathInterpolatorCompat
@@ -70,15 +71,6 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             }
                         })
 
-                        fireworkRed.fadeShow(duration = 200)
-                        fireworkRed.start()
-                        fireworkBlue.fadeShow(duration = 200)
-                        fireworkBlue.start()
-                        fireworkYellow.fadeShow(duration = 200)
-                        fireworkYellow.start()
-                        fireworkGreen.fadeShow(duration = 200)
-                        fireworkGreen.start()
-
                         card.animToY(250f, duration = 1000, interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f))
                         card.scaleY(0.4f, duration = 300, after = 800)
                         card.scaleY(1f, duration = 200, after = 1200)
@@ -105,6 +97,18 @@ class FoodOrderViewModel @ViewModelInject constructor(
                 }
 
                 override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                    fireworkRed.fadeShow(duration = 200)
+                    fireworkRed.setColor(resources.getColor(R.color.red_200))
+                    fireworkRed.start()
+                    fireworkBlue.fadeShow(duration = 200)
+                    fireworkBlue.setColor(resources.getColor(R.color.dark_blue_700))
+                    fireworkBlue.start()
+                    fireworkYellow.fadeShow(duration = 200)
+                    fireworkYellow.setColor(resources.getColor(R.color.yellow_200))
+                    fireworkYellow.start()
+                    fireworkGreen.fadeShow(duration = 200)
+                    fireworkGreen.setColor(resources.getColor(R.color.green_200))
+                    fireworkGreen.start()
                 }
             })
         }

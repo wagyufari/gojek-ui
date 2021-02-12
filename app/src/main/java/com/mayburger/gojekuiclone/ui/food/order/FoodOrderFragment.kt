@@ -9,6 +9,7 @@ import com.mayburger.gojekuiclone.R
 import com.mayburger.gojekuiclone.databinding.FragmentFoodOrderBinding
 import com.mayburger.gojekuiclone.ui.base.BaseFragment
 import com.mayburger.gojekuiclone.ui.food.order.FoodOrderViewModel.Companion.playOrderAnimation
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.width
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_food_order.*
@@ -29,9 +30,6 @@ class FoodOrderFragment : BaseFragment<FragmentFoodOrderBinding, FoodOrderViewMo
         super.onViewCreated(view, savedInstanceState)
         viewModel.navigator = this
 
-        fireworkRed.setFireworkResource(R.drawable.shp_circle_red200)
-        fireworkBlue.setFireworkResource(R.drawable.shp_circle_blue700)
-        fireworkYellow.setFireworkResource(R.drawable.shp_circle_yellow200)
 
         card.setOnClickListener {
             if (motionLayout.currentState == R.id.start) {
