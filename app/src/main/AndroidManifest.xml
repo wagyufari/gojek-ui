@@ -20,11 +20,6 @@
             android:theme="@style/Theme.Gojek"
             >
         <activity android:name=".FlipActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".ui.splash.SplashActivity">
         </activity>
@@ -45,11 +40,17 @@
 
         <activity android:name=".ui.food.FoodActivity">
 
+
         </activity>
         <activity
                 android:name=".ui.main.MainActivity"
                 android:theme="@style/Theme.Gojek.Main.Light"
                 >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

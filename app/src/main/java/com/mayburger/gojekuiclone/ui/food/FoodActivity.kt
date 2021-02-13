@@ -56,11 +56,11 @@ class FoodActivity : BaseActivity<ActivityFoodBinding, FoodViewModel>(), FoodNav
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.fragments.filterIsInstance<FoodOrderFragment>().isNotEmpty()) {
-            RxBus.getDefault().send(BackEvent(supportFragmentManager.fragments.filterIsInstance<FoodOrderFragment>()[0]))
-        } else {
+//        if (supportFragmentManager.fragments.filterIsInstance<FoodOrderFragment>().isNotEmpty()) {
+//            RxBus.getDefault().send(BackEvent(supportFragmentManager.fragments.filterIsInstance<FoodOrderFragment>()[0]))
+//        } else {
             super.onBackPressed()
-        }
+//        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

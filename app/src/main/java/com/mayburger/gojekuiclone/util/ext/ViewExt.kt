@@ -1,9 +1,6 @@
 package com.mayburger.gojekuiclone.util.ext
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.animation.TimeInterpolator
-import android.animation.ValueAnimator
+import android.animation.*
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
@@ -19,6 +16,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.animation.addListener
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.palette.graphics.Palette
@@ -88,18 +87,21 @@ object ViewUtils {
     ) {
         Handler().postDelayed({
             AnimatorSet().apply {
-                play(ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 1f).apply {
-                    this.duration = duration ?: 400
-                    addListener(onEnd = {
-                        onEnd?.invoke()
-                    })
-                }).after(
-                        ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 0f).apply {
-                            this.duration = duration ?: 400
-                            addListener(onEnd = {
+                playSequentially(
+                    ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 0f).apply {
+                        setDuration((duration?:400)/2)
+                    },
+                    ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 1f).apply {
+                        addUpdateListener {
+                            if (it.animatedFraction > 0.7){
                                 onFlip?.invoke()
-                            })
+                            }
                         }
+                        setDuration((duration?:400)/2)
+                        doOnEnd {
+                            onEnd?.invoke()
+                        }
+                    }
                 )
                 start()
             }
@@ -135,9 +137,9 @@ object ViewUtils {
                         this.cancel()
                     }
                 }, ((duration ?: 500).times(percent ?: 100f) / 100).toLong())
-                addListener(onEnd = {
+                doOnEnd {
                     onEnd?.invoke()
-                })
+                }
                 interpolator?.let {
                     this.interpolator = it
                 }
@@ -259,13 +261,16 @@ object ViewUtils {
         }
     }
 
-    fun View.scaleX(scale: Float, duration: Long? = 1000, after:Long?=0,onEnd: (() -> Unit)? = {}) {
+    fun View.scaleX(scale: Float, duration: Long? = 1000, after:Long?=0, onEnd: (() -> Unit)? = {}, onUpdate: ((Float) -> Unit)? = {}) {
         AnimatorSet().apply {
             play(ObjectAnimator.ofFloat(this@scaleX, View.SCALE_X, scale).apply {
                 this.duration = duration ?: 1000
-                addListener(onEnd = {
+                doOnEnd {
                     onEnd?.invoke()
-                })
+                }
+                addUpdateListener {
+                    onUpdate?.invoke(it.animatedFraction)
+                }
             }).after(after?:0)
             start()
         }
