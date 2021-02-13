@@ -1,8 +1,7 @@
 package com.mayburger.gojekuiclone.ui.food.order
 
-import android.animation.ValueAnimator
-import android.graphics.Color
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.view.animation.DecelerateInterpolator
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.animation.PathInterpolatorCompat
 import androidx.hilt.lifecycle.ViewModelInject
@@ -16,7 +15,9 @@ import com.mayburger.gojekuiclone.util.ext.ViewUtils.dpToPx
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeHide
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.fadeShow
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.flipX
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.scale
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleAnimY
+import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleX
 import com.mayburger.gojekuiclone.util.ext.ViewUtils.scaleY
 import com.mayburger.gojekuiclone.util.rx.SchedulerProvider
 import kotlinx.android.synthetic.main.fragment_food_order.*
@@ -54,7 +55,7 @@ class FoodOrderViewModel @ViewModelInject constructor(
                 }
 
                 override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-                    if (p3 > 0.8) {
+                    if (p3 > 0.6) {
                         image.setImageResource(R.drawable.ic_done)
                         val drawable = image.drawable
                         if (drawable is AnimatedVectorDrawableCompat) {
@@ -63,36 +64,49 @@ class FoodOrderViewModel @ViewModelInject constructor(
                             drawable.start()
                         }
 
-                        text.animToY(20f, duration = 500)
-                        text.fadeShow(duration = 500, onEnd = {
-                            delay(1000) {
-                                text.animToY(0f, duration = 500)
-                                text.fadeHide(duration = 500)
-                            }
+
+                        card.scaleX(0f, duration = 1000,onEnd = {
+//                            card.cardElevation = 2f
+//                            image.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16))
+//                            card.setCardBackgroundColor(requireActivity().resources.getColor(R.color.red_200))
+//                            image.setImageResource(R.drawable.ic_gofood)
+                            card.scaleX(1f, duration = 1000)
                         })
 
-                        card.animToY(250f, duration = 1000, interpolator = PathInterpolatorCompat.create(0.66f, -0.09f, 0f, 1.08f))
-                        card.scaleY(0.4f, duration = 300, after = 800)
-                        card.scaleY(1f, duration = 200, after = 1200)
-                        card.animToY(0f, duration = 1200, after = 1000, interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f))
-                        card.flipX(duration = 200, after = 700, onFlip = {
-                            card.cardElevation = 2f
-                            image.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16))
-                            card.setCardBackgroundColor(requireActivity().resources.getColor(R.color.red_200))
-                            image.setImageResource(R.drawable.ic_gofood)
-                        })
-                        card.scaleAnimY(0.6f, y = 270f, duration = 1300, after = 2500)
+//                        text.animToY(20f, duration = 500)
+//                        text.fadeShow(duration = 500, onEnd = {
+//                            delay(1000) {
+//                                text.animToY(0f, duration = 500)
+//                                text.fadeHide(duration = 500)
+//                            }
+//                        })
 
-                        background.fadeHide(duration = 1200, after = 2500, onEnd = {
-                            isAnimating = false
-                            root.removeView(fireworkBlue)
-                            root.removeView(fireworkRed)
-                            root.removeView(fireworkYellow)
-                            root.removeView(fireworkGreen)
-                        })
+//                        card.animToY(250f, duration = 1000, interpolator = PathInterpolatorCompat.create(.97f,-0.02f,.58f,1.04f))
+//                        card.scaleY(0.4f, duration = 300, after = 1000)
+//                        card.scaleY(1f, duration = 200, after = 1200)
+//                        card.animToY(0f, duration = 1200, after = 1000, interpolator = PathInterpolatorCompat.create(.1f, .98f, .99f, 1f))
+//                        card.flipX(duration = 200, after = 1600, onFlip = {
+//                            card.cardElevation = 2f
+//                            image.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16))
+//                            card.setCardBackgroundColor(requireActivity().resources.getColor(R.color.red_200))
+//                            image.setImageResource(R.drawable.ic_gofood)
+//                        })
+//                        card.scaleAnimY(0.6f, y = 270f, duration = 1300, after = 2200,interpolator = PathInterpolatorCompat.create(.97f,-0.02f,.58f,1.04f))
+//                        card.scaleY(0.4f,duration = 300, after = 3300)
+//                        card.animToY(285f, duration = 300, after = 3300)
+//                        card.scaleY(0.6f,duration = 300, after = 3600,interpolator = DecelerateInterpolator())
+//                        card.animToY(270f, duration = 600, after = 3600,interpolator = DecelerateInterpolator())
 
-                        marker_foot.animToY(245f, duration = 0)
-                        marker_foot.fadeShow(after = 3800, duration = 300)
+//                        background.fadeHide(duration = 1200, after = 2500, onEnd = {
+//                            isAnimating = false
+//                            root.removeView(fireworkBlue)
+//                            root.removeView(fireworkRed)
+//                            root.removeView(fireworkYellow)
+//                            root.removeView(fireworkGreen)
+//                        })
+//
+//                        marker_foot.animToY(245f, duration = 0)
+//                        marker_foot.fadeShow(after = 3800, duration = 300)
                     }
                 }
 

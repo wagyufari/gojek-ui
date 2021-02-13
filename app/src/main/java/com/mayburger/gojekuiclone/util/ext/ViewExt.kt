@@ -23,8 +23,6 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.palette.graphics.Palette
 import com.mayburger.gojekuiclone.R
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToX
-import com.mayburger.gojekuiclone.util.ext.ViewUtils.animToY
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.cos
@@ -42,6 +40,12 @@ object ViewUtils {
 
     fun dpToPxFloat(dp: Float): Float {
         return (dp * Resources.getSystem().displayMetrics.density)
+    }
+
+    fun View.getCoordinates():IntArray{
+        return IntArray(2).apply {
+            this@getCoordinates.getLocationInWindow(this)
+        }
     }
 
     suspend fun Bitmap.isColorDark(): Boolean {
@@ -219,7 +223,7 @@ object ViewUtils {
             start()
         }
     }
-    fun View.scaleAnimY(scale: Float,y:Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}, after: Long? = 0) {
+    fun View.scaleAnimY(scale: Float, y:Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}, after: Long? = 0, interpolator:TimeInterpolator?=null) {
         AnimatorSet().apply {
             play(ObjectAnimator.ofFloat(this@scaleAnimY, View.SCALE_X, scale).apply {
                 this.duration = duration ?: 1000
@@ -235,32 +239,34 @@ object ViewUtils {
                 addListener(onEnd = {
                     onEnd?.invoke()
                 })
+                this.interpolator = interpolator
             }).after(after ?: 0)
             start()
         }
     }
 
 
-    fun View.scaleY(scale: Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}, after: Long? = 0) {
+    fun View.scaleY(scale: Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}, after: Long? = 0, interpolator:TimeInterpolator?=null) {
         AnimatorSet().apply {
             play(ObjectAnimator.ofFloat(this@scaleY, View.SCALE_Y, scale).apply {
                 this.duration = duration ?: 1000
                 addListener(onEnd = {
                     onEnd?.invoke()
                 })
+                this.interpolator = interpolator
             }).after(after ?: 0)
             start()
         }
     }
 
-    fun View.scaleX(scale: Float, duration: Long? = 1000, onEnd: (() -> Unit)? = {}) {
+    fun View.scaleX(scale: Float, duration: Long? = 1000, after:Long?=0,onEnd: (() -> Unit)? = {}) {
         AnimatorSet().apply {
             play(ObjectAnimator.ofFloat(this@scaleX, View.SCALE_X, scale).apply {
                 this.duration = duration ?: 1000
                 addListener(onEnd = {
                     onEnd?.invoke()
                 })
-            })
+            }).after(after?:0)
             start()
         }
     }
