@@ -83,6 +83,7 @@ object ViewUtils {
             duration: Long? = 400,
             onFlip: (() -> Unit)? = {},
             onEnd: (() -> Unit)? = {},
+            endValue:Float?=1f,
             after: Long? = 0
     ) {
         Handler().postDelayed({
@@ -91,7 +92,7 @@ object ViewUtils {
                     ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 0f).apply {
                         setDuration((duration?:400)/2)
                     },
-                    ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, 1f).apply {
+                    ObjectAnimator.ofFloat(this@flipX, View.SCALE_X, endValue?:1f).apply {
                         addUpdateListener {
                             if (it.animatedFraction > 0.7){
                                 onFlip?.invoke()
